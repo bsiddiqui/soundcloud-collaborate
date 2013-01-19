@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  artist: MyString
+  length: MyString
+  upVotes: MyString
+  downVotes: MyString
+  totalVotes: MyString
+  user_id: MyString
+  party_profile_id: MyString
+  played: false
+
+two:
+  name: MyString
+  artist: MyString
+  length: MyString
+  upVotes: MyString
+  downVotes: MyString
+  totalVotes: MyString
+  user_id: MyString
+  party_profile_id: MyString
+  played: false
