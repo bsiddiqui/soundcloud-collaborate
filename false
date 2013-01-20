@@ -1,0 +1,31 @@
+Plural version of the model detected, using singularized version. Override with --force-plural.
+[1m[37m      invoke[0m  active_record
+[1m[32m      create[0m    db/migrate/20130120005325_create_songs.rb
+[1m[32m      create[0m    app/models/song.rb
+[1m[37m      invoke[0m    test_unit
+[1m[32m      create[0m      test/unit/song_test.rb
+[1m[32m      create[0m      test/fixtures/songs.yml
+[1m[37m      invoke[0m  resource_route
+[1m[32m       route[0m    resources :songs
+[1m[37m      invoke[0m  scaffold_controller
+[1m[32m      create[0m    app/controllers/songs_controller.rb
+[1m[37m      invoke[0m    erb
+[1m[32m      create[0m      app/views/songs
+[1m[32m      create[0m      app/views/songs/index.html.erb
+[1m[32m      create[0m      app/views/songs/edit.html.erb
+[1m[32m      create[0m      app/views/songs/show.html.erb
+[1m[32m      create[0m      app/views/songs/new.html.erb
+[1m[32m      create[0m      app/views/songs/_form.html.erb
+[1m[37m      invoke[0m    test_unit
+[1m[32m      create[0m      test/functional/songs_controller_test.rb
+[1m[37m      invoke[0m    helper
+[1m[32m      create[0m      app/helpers/songs_helper.rb
+[1m[37m      invoke[0m      test_unit
+[1m[32m      create[0m        test/unit/helpers/songs_helper_test.rb
+[1m[37m      invoke[0m  assets
+[1m[37m      invoke[0m    coffee
+[1m[32m      create[0m      app/assets/javascripts/songs.js.coffee
+[1m[37m      invoke[0m    scss
+[1m[32m      create[0m      app/assets/stylesheets/songs.css.scss
+[1m[37m      invoke[0m  scss
+[1m[34m   identical[0m    app/assets/stylesheets/scaffolds.css.scss

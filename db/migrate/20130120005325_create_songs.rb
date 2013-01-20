@@ -9,7 +9,7 @@ class CreateSongs < ActiveRecord::Migration
       t.string :totalVotes
       t.string :user_id
       t.string :party_profile_id
-      t.boolean :played
+      t.boolean :played, :default => false
 
       t.timestamps
     end

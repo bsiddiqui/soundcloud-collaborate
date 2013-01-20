@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @party_profile.name %>
+</p>
+
+<p>
+  <b>Password:</b>
+  <%= @party_profile.password %>
+</p>
+
+<p>
+  <b>Location:</b>
+  <%= @party_profile.location %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @party_profile.date %>
+</p>
+
+<p>
+  <b>Host:</b>
+  <%= @party_profile.host %>
+</p>
+
+
+<%= link_to 'Edit', edit_party_profile_path(@party_profile) %> |
+<%= link_to 'Back', party_profiles_path %>

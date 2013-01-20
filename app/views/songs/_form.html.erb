@@ -1,0 +1,57 @@
+<%= form_for(@song) do |f| %>
+  <% if @song.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@song.errors.count, "error") %> prohibited this song from being saved:</h2>
+
+      <ul>
+      <% @song.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :artist %><br />
+    <%= f.text_field :artist %>
+  </div>
+  <div class="field">
+    <%= f.label :length %><br />
+    <%= f.text_field :length %>
+  </div>
+  <div class="field">
+    <%= f.label :upVotes %><br />
+    <%= f.text_field :upVotes %>
+  </div>
+  <div class="field">
+    <%= f.label :downVotes %><br />
+    <%= f.text_field :downVotes %>
+  </div>
+  <div class="field">
+    <%= f.label :totalVotes %><br />
+    <%= f.text_field :totalVotes %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.text_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :party_profile_id %><br />
+    <%= f.text_field :party_profile_id %>
+  </div>
+  <div class="field">
+    <%= f.label :played %><br />
+    <%= f.text_field :played %>
+  </div>
+  <div class="field">
+    <%= f.label : %><br />
+    <%= f.text_field : %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

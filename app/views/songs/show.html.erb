@@ -1,0 +1,55 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @song.name %>
+</p>
+
+<p>
+  <b>Artist:</b>
+  <%= @song.artist %>
+</p>
+
+<p>
+  <b>Length:</b>
+  <%= @song.length %>
+</p>
+
+<p>
+  <b>Upvotes:</b>
+  <%= @song.upVotes %>
+</p>
+
+<p>
+  <b>Downvotes:</b>
+  <%= @song.downVotes %>
+</p>
+
+<p>
+  <b>Totalvotes:</b>
+  <%= @song.totalVotes %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @song.user_id %>
+</p>
+
+<p>
+  <b>Party profile:</b>
+  <%= @song.party_profile_id %>
+</p>
+
+<p>
+  <b>Played:</b>
+  <%= @song.played %>
+</p>
+
+<p>
+  <b>:</b>
+  <%= @song. %>
+</p>
+
+
+<%= link_to 'Edit', edit_song_path(@song) %> |
+<%= link_to 'Back', songs_path %>
