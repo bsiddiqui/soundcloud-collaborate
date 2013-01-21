@@ -13,71 +13,59 @@ class SongsController < ApplicationController
   # GET /songs/1
   # GET /songs/1.json
   def show
-    @song = Song.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @song }
+    @song = Song.find_by_name_and_party_profile_id(params[:song][:name], params[:song][:party_profile_id])
+    if params[:commit] == "Up"
+      @votecount = @song.totalVotes.to_i + 1
+      @song.update_attribute(:totalVotes, @votecount)
+      redirect_to(:back)
+    end
+    if params[:commit] == "Down"
+      @votecount = @song.totalVotes.to_i - 1
+      @song.update_attribute(:totalVotes, @votecount)
+      redirect_to(:back)
     end
   end
 
   # GET /songs/new
   # GET /songs/new.json
   def new
-    @song = Song.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @song }
-    end
   end
 
   # GET /songs/1/edit
   def edit
-    @song = Song.find(params[:id])
   end
 
   # POST /songs
   # POST /songs.json
   def create
-    @song = Song.new(params[:song])
+    @party_profile = PartyProfile.includes(:songs).where("id = ?", params[:party_profile_id]).first
 
-    respond_to do |format|
-      if @song.save
-        format.html { redirect_to @song, notice: 'Song was successfully created.' }
-        format.json { render json: @song, status: :created, location: @song }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @song.errors, status: :unprocessable_entity }
+    @song = Song.new(:name => params[:name],
+      :artist => params[:artist],
+      :party_profile_id => params[:party_profile_id],
+      :totalVotes => 0)
+    #add length
+    if @song.save
+      respond_to do |format|
+        format.js
       end
+    else
+      redirect_to party_path(@party), :alert => "Could not add song."
     end
   end
 
   # PUT /songs/1
   # PUT /songs/1.json
   def update
-    @song = Song.find(params[:id])
-
-    respond_to do |format|
-      if @song.update_attributes(params[:song])
-        format.html { redirect_to @song, notice: 'Song was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @song.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # DELETE /songs/1
   # DELETE /songs/1.json
   def destroy
-    @song = Song.find(params[:id])
-    @song.destroy
-
-    respond_to do |format|
-      format.html { redirect_to songs_url }
-      format.json { head :no_content }
+    @song = Song.find_by_party_id_and_name(params[:party_id], params[:name])
+    unless post.empty?
+      @song.destroy
     end
+    redirect_to(:back)
   end
 end

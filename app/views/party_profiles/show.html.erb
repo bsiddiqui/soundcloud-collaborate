@@ -1,30 +1,70 @@
-<p id="notice"><%= notice %></p>
+<div class="span6">
+  <div id="spotify-play-button" style="background-color:#000000;">
+    <h1 style="color:#00FFFF;"><%= @party_profile.name %></h1>
+  </div>
 
-<p>
-  <b>Name:</b>
-  <%= @party_profile.name %>
-</p>
+<div class="span6">
+  <div class="well" id="spotify-playlist">
+    <h3> Playlist </h3>
+    
+    <div class="playlist">
+      <table class='table table-striped'>
+        <tbody class ="playlist-refresh">
+          <% @songs.each_with_index do |s,i| %>
+          <tr>
 
-<p>
-  <b>Password:</b>
-  <%= @party_profile.password %>
-</p>
+            <td class = "td">
+              <div class = "delete">
+                <%= button_to "X", { :controller => "songs", :action => "destroy", :party_profile_id => s.party_profile_id, :name => s.name}, :confirm => "Delete this song?", :method => :delete, :class => "btn btn-inverse" %>
+              </div> 
+            </td>
+            <td>
+              <%= "#{i+1}" %>.
 
-<p>
-  <b>Location:</b>
-  <%= @party_profile.location %>
-</p>
+              <%= s.name %>   
+            </td>
 
-<p>
-  <b>Date:</b>
-  <%= @party_profile.date %>
-</p>
+            <td>
+              <div class = "button2"> 
+                <span style = "float:right;"> 
+                  <%= form_for [@song], :html => {:method => 'get'} do |f|%>
 
-<p>
-  <b>Host:</b>
-  <%= @party_profile.host %>
-</p>
+                  <%= f.hidden_field :name, {:value => s.name} %>
+                  <%= f.hidden_field :party_profile_id, {:value => s.party_profile_id} %>
+                  <%= f.submit "Down", :class => "btn btn-danger" %>
+                  <% end %>
+                </span>
+                <div class = "buttons_holder">
+                  <div class = "button1">
+                    <span style = "float:right;">
+                      <%= form_for [@song], :html => {:method => 'get'} do |f|%>
+                      <%= f.hidden_field :name, {:value => s.name} %>
+                      <%= f.hidden_field :party_profile_id, {:value => s.party_profile_id} %>
+                      <%= f.submit "Up", :class => "btn btn-success" %>
+                      <% end %>   
+                    </span> 
+                  </div>
+
+                  <span style = "float:left;">
+                    <%= s.totalvotes %>
+                  </span>
+
+                </div>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="span12">
+  <div class="well" id="spotify" style="background-color:#FFFFFF;">
 
 
-<%= link_to 'Edit', edit_party_profile_path(@party_profile) %> |
-<%= link_to 'Back', party_profiles_path %>
+    <div class="search">
+    </div>
+
+  </div>
+</div>

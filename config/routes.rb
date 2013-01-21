@@ -1,8 +1,19 @@
 PlayedbyMeHh::Application.routes.draw do
+
+  get "/", :to =>  "sessions#new"
+
+  get "static_pages/new"
+
+  get "parties/search", :to => 'party_profiles#search'
+
   resources :guests
 
 
-  resources :party_profiles
+  resources :party_profiles do
+    member do
+      get :search
+    end
+  end
 
 
   resources :songs
@@ -10,6 +21,10 @@ PlayedbyMeHh::Application.routes.draw do
 
   resources :users
 
+  get   '/login', :to => 'sessions#new', :as => :login
+  match '/auth/:provider/callback', :to => 'sessions#create'
+
+  resources :sessions
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

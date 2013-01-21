@@ -1,0 +1,21 @@
+<%= form_for(@party_profile) do |f| %>
+  <% if @party_profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@party_profile.errors.count, "error") %> prohibited this search from occuring:</h2>
+
+      <ul>
+      <% @party_profile.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= f.text_field :name , :placeholder => 'Enter Party 
+    name...'%><br>
+    <%= f.submit "Search", :class => "btn btn-primary"%>
+<% end %>
+</div>
+</div>
+
+<div class ="bgImage"><%= image_tag("dj.png") %></div>

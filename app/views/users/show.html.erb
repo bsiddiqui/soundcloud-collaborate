@@ -1,20 +1,116 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
+<div class="well" id="spotify">
 
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
+<div class="span11", style = "padding-left:12px;">
+	<div id = "user_parties">
+		<h2> Parties You Hosted </h2>
+		<div>
+			<% if @parties1.empty? %>
+  				<%= flash[:alert] = "You have not thrown any parties. Start a party?" %>
+  			<% else %>
 
-<p>
-  <b>Password:</b>
-  <%= @user.password %>
-</p>
+			<table class = 'table table-hover' style="background:#ffffff;">
+				<tbody>
+					<tr style = "font-weight: 900">
+						<td style = "padding-left: 70px;"> Party Name </td>
+						<td style = "padding-right: 28px;"> Date </td>
+						<td style = "padding-right: 8px;"> Location </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>	
+		
+		<div class="well">
+			<table class='table table-hover'>
+				<tbody class ="list" style ="font-weight:bold;">
 
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+					<% @parties1.each_with_index do |party, index| %>
+					<tr>
+
+						<td style = "padding-left: 40px;">
+							<%= "#{index+1}" %>
+						</td>
+
+						<td>
+							<%= party.name %>
+						</td>
+
+						<td>
+							<%= party.date %>
+						</td>
+
+						</td>
+
+						<td style = "width:250px; padding-left: 80px;">
+							<%= party.location %>
+
+						</td>
+
+					</tr>
+					<% end %>
+				<% end %> 
+
+  		<h2> Parties You Attended </h2>
+
+			<div>
+	<!--		
+			<%# if @parties2.empty? %>
+  				<%#= flash[:alert] = "You have been to any parties." %>
+  			<% #else %>
+
+
+			<table class = 'table table-hover' style="background:#ffffff;">
+				<tbody>
+					<tr style = "font-weight: 900">
+						<td style = "padding-left: 70px;"> Party Name </td>
+						<td style = "padding-right: 28px;"> Date </td>
+						<td style = "padding-right: 8px;"> Location </td>
+					</tr>
+				</tbody>
+			</table>
+		</div>	
+		
+		<div class="well">
+			<table class='table table-hover'>
+				<tbody class ="list" style ="font-weight:bold;">
+
+
+					<% #@parties2.each_with_index do |party, index| %>
+					<tr>
+
+						<td style = "padding-left: 40px;">
+							<%#= "#{index+1}" %>
+						</td>
+
+						<td>
+							<#%= party.name %>
+						</td>
+
+						<td>
+							<#%= party.date %>
+						</td>
+
+						</td>
+
+						<td style = "width:250px; padding-left: 80px;">
+							<#%= party.location %>
+
+						</td>
+
+					</tr>
+					<#% end %>  
+				</tbody>
+			</table>
+			<#% end %> 
+	--> 
+		
+		</div>
+	</div>
+</div>
+
+</div>
+
+
+<div class ="bgImage"><%= image_tag("dj.png") %></div>
+

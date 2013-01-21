@@ -1,4 +1,6 @@
 class PartyProfilesController < ApplicationController
+
+  before_filter :authenticate_user!, :except => :index
   # GET /party_profiles
   # GET /party_profiles.json
   def index
@@ -13,71 +15,60 @@ class PartyProfilesController < ApplicationController
   # GET /party_profiles/1
   # GET /party_profiles/1.json
   def show
-    @party_profile = PartyProfile.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @party_profile }
-    end
+    @party_profile = PartyProfile.includes(:songs).where("id = ?", params[:id]).first
+    @songs = (@party_profile.songs.where("played = ?", "false")).sort! { |a,b| b[:totalVotes] <=> a[:totalVotes]}
+    #@party_tracks = @party.party_tracks
   end
 
   # GET /party_profiles/new
   # GET /party_profiles/new.json
   def new
-    @party_profile = PartyProfile.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @party_profile }
-    end
+    @party_profile = PartyProfile.new 
+ #   render :partial => 'form', :locals => {:party_profile => @party_profile}
   end
 
   # GET /party_profiles/1/edit
-  def edit
-    @party_profile = PartyProfile.find(params[:id])
+  def search
+    @party = PartyProfile.where("name = ?", params[:name]).all.sort_by!{|p| p.name.downcase}
+    if @party != nil
+      #AJAX redirect_to party_path(@party)
+    else
+      redirect_to (:back), :alert => "Nobody seems to be throwing that party! Try again."
+    end
   end
 
   # POST /party_profiles
   # POST /party_profiles.json
   def create
-    @party_profile = PartyProfile.new(params[:party_profile])
+    party_profile = PartyProfile.new(params[:party_profile]) 
+         party_profile.host = current_user
 
-    respond_to do |format|
-      if @party_profile.save
-        format.html { redirect_to @party_profile, notice: 'Party profile was successfully created.' }
-        format.json { render json: @party_profile, status: :created, location: @party_profile }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @party_profile.errors, status: :unprocessable_entity }
-      end
-    end
+  #    respond_to do |format|
+        if party_profile.save
+          redirect_to party_profile_path(party_profile)
+ #        format.html {redirect_to party_profile_path(@party_profile), :notice => "Your party has been created."}
+          
+        else 
+#          format.html {render partial: 'form', flash[:notice] => "fail"}
+          #format.json {render json: @party_profile.errors, status: :unprocessable_entity }
+         # format.js { render action: 'reload' }
+           redirect_to new_party_profile_path
+            flash[:alert] = "Please fill out all of the fields."
+        end
+  #   end
+
   end
+
+
 
   # PUT /party_profiles/1
   # PUT /party_profiles/1.json
   def update
-    @party_profile = PartyProfile.find(params[:id])
-
-    respond_to do |format|
-      if @party_profile.update_attributes(params[:party_profile])
-        format.html { redirect_to @party_profile, notice: 'Party profile was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @party_profile.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # DELETE /party_profiles/1
   # DELETE /party_profiles/1.json
   def destroy
-    @party_profile = PartyProfile.find(params[:id])
-    @party_profile.destroy
-
-    respond_to do |format|
-      format.html { redirect_to party_profiles_url }
-      format.json { head :no_content }
-    end
   end
+
 end
