@@ -21,6 +21,13 @@ group :assets do
   gem 'font-awesome-sass-rails'
   gem 'therubyracer', :platforms => :ruby
   gem 'uglifier', '>= 1.0.3'
+  gem 'httmultiparty'
+  gem 'httparty'
+  gem 'crack'
+  gem 'multipart-post'
+  gem 'hashie'
+  gem 'soundcloud'
+
 end
 
 gem 'jquery-rails'
