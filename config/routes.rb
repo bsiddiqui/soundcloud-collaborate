@@ -4,7 +4,9 @@ PlayedbyMeHh::Application.routes.draw do
 
   get "static_pages/new"
 
-  get "parties/search", :to => 'party_profiles#search'
+  get "/parties/search", :to => 'party_profiles#search'
+
+  get "/search", :to => 'party_profiles#display'
 
   resources :guests
 
@@ -12,6 +14,7 @@ PlayedbyMeHh::Application.routes.draw do
   resources :party_profiles do
     member do
       get :search
+      get :display
     end
   end
 

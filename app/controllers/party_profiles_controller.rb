@@ -27,37 +27,51 @@ class PartyProfilesController < ApplicationController
  #   render :partial => 'form', :locals => {:party_profile => @party_profile}
   end
 
-  # GET /party_profiles/1/edit
-  def search
-    @party = PartyProfile.where("name = ?", params[:name]).all.sort_by!{|p| p.name.downcase}
-    if @party != nil
+
+def search
+  @party_profile = PartyProfile.new
+end
+
+
+    #.sort_by(&:name.downcase)
+  #  if @party != nil
       #AJAX redirect_to party_path(@party)
+   # else
+    #  redirect_to (:back), :alert => "Nobody seems to be throwing that party! Try again."
+   # end
+
+   def display
+    @party_profile = PartyProfile.find_all_by_name(params[:name])
+    if @party_profile.empty?
+      redirect_to "/parties/search"
+      flash[:alert] = "This party does not seem to exist. Try again."
     else
-      redirect_to (:back), :alert => "Nobody seems to be throwing that party! Try again."
+      render :partial => 'searchresults', :locals => {:party_profile => @party_profile, :name => params[:name]}
     end
   end
+
 
   # POST /party_profiles
   # POST /party_profiles.json
   def create
     party_profile = PartyProfile.new(params[:party_profile]) 
-         party_profile.host = current_user
+    party_profile.host = current_user
 
   #    respond_to do |format|
-        if party_profile.save
-          redirect_to party_profile_path(party_profile)
+  if party_profile.save
+    redirect_to party_profile_path(party_profile)
  #        format.html {redirect_to party_profile_path(@party_profile), :notice => "Your party has been created."}
-          
-        else 
+
+else 
 #          format.html {render partial: 'form', flash[:notice] => "fail"}
           #format.json {render json: @party_profile.errors, status: :unprocessable_entity }
          # format.js { render action: 'reload' }
-           redirect_to new_party_profile_path
-            flash[:alert] = "Please fill out all of the fields."
-        end
+         redirect_to new_party_profile_path
+         flash[:alert] = "Please fill out all of the fields."
+       end
   #   end
 
-  end
+end
 
 
 
