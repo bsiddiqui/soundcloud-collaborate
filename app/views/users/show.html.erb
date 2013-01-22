@@ -3,12 +3,10 @@
 
 <div class="span11", style = "padding-left:12px;">
 	<div id = "user_parties">
+
 		<h2> Parties You Hosted </h2>
 		<div>
-			<% if @parties1.empty? %>
-  				<%= flash.now[:alert] = "You have not thrown any parties. Start a party?" %>
-  			<% else %>
-
+  			<% unless @parties_hosted.empty? %>
 			<table class = 'table table-hover' style="background:#ffffff;">
 				<tbody>
 					<tr style = "font-weight: 900">
@@ -25,7 +23,7 @@
 				<tbody class ="list" style ="font-weight:bold;">
 
 
-					<% @parties1.each_with_index do |party, index| %>
+					<% @parties_hosted.each_with_index do |party, index| %>
 					<tr>
 
 						<td style = "padding-left: 40px;">
