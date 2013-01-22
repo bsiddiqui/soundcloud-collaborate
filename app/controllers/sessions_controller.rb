@@ -8,13 +8,16 @@ class SessionsController < ApplicationController
   #the user to their home page, else it displays an error message
   def create
     $auth_hash = request.env['omniauth.auth']
-    name = $auth_hash["name"]
+    name = $auth_hash["info"]["name"]
+    first_name = $auth_hash["info"]["first_name"]
+    last_name = $auth_hash["info"]["last_name"]
+    email = $auth_hash["info"]["email"]
+    image = $auth_hash["info"]["image"]
     uid = $auth_hash["uid"] 
-    user = User.new(:name => name)
-    user = User.new(:uid => uid)
+    user = User.new(:name => name, :first_name => first_name, :last_name => last_name, :email => email, :image => image, :uid => uid)
     if user.save
       session[:user_id] = user.id
-      redirect_to new_party_profile_path, :alert => "Thanks for signing up!"
+      redirect_to user_path(current_user), :alert => "Thanks for signing up!"
     else
       session[:user_id] = User.find_by_uid(uid).id
       redirect_to user_path(current_user), :alert => "Welcome Back"

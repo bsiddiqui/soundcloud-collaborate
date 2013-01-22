@@ -29,7 +29,7 @@ class UsersController < ApplicationController
   # logs out the user
   def destroy
     destroy_session
-    redirect_to parties_path, :alert => "Signed Out" 
+    redirect_to "/login", :alert => "Signed Out" 
   end
   
   def update

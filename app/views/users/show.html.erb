@@ -6,7 +6,7 @@
 		<h2> Parties You Hosted </h2>
 		<div>
 			<% if @parties1.empty? %>
-  				<%= flash[:alert] = "You have not thrown any parties. Start a party?" %>
+  				<%= flash.now[:alert] = "You have not thrown any parties. Start a party?" %>
   			<% else %>
 
 			<table class = 'table table-hover' style="background:#ffffff;">
