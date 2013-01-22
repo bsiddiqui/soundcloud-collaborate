@@ -16,6 +16,8 @@ class UsersController < ApplicationController
     if @parties_hosted.empty?
       flash.now[:alert] = "You have not thrown any parties. Start a party?"
     end
+
+    @parties_guest 
    # @guest = Guest.find_all_by_user_id(current_user.id)
     #  unless @guest.empty?
    #     params[:guest].each do |i|
