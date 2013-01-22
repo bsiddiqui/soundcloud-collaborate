@@ -1,13 +1,10 @@
 
 <div class="well" id="spotify">
 
-<div class="span11", style = "padding-left:12px;">
-	<div id = "user_parties">
-
+	<div class="span11", style = "padding-left:12px;">
 		<h2> Parties You Hosted </h2>
 		<div>
-  			<% unless @parties_hosted.empty? %>
-			<table class = 'table table-hover' style="background:#ffffff;">
+			<table class = 'table table-hover' >
 				<tbody>
 					<tr style = "font-weight: 900">
 						<td style = "padding-left: 70px;"> Party Name </td>
@@ -17,98 +14,45 @@
 				</tbody>
 			</table>
 		</div>	
-		
-		<div class="well">
-			<table class='table table-hover'>
-				<tbody class ="list" style ="font-weight:bold;">
+
+		<table class='table table-hover'>
+			<tbody class ="list" style ="font-weight:bold;">
 
 
-					<% @parties_hosted.each_with_index do |party, index| %>
-					<tr>
+				<% @parties_hosted.each_with_index do |party, index| %>
+				<tr>
 
-						<td style = "padding-left: 40px;">
-							<%= "#{index+1}" %>
-						</td>
+					<td style = "padding-left: 40px;">
+						<%= "#{index+1}" %>
+					</td>
 
-						<td>
-							<%= party.name %>
-						</td>
+					<td style= "width: 140px; padding-left: 20px">
+						<%= link_to(party.name, party_profile_path(party))%>
+					</td>
 
-						<td>
-							<%= party.date %>
-						</td>
+					<td>
+						<%= party.date %>
+					</td>
 
-						</td>
+				</td>
 
-						<td style = "width:250px; padding-left: 80px;">
-							<%= party.location %>
+				<td style = "width:250px; padding-left: 80px;">
+					<%= party.location %>
 
-						</td>
+				</td>
 
-					</tr>
-					<% end %>
-				<% end %> 
-
-  		<h2> Parties You Attended </h2>
-
-			<div>
-	<!--		
-			<%# if @parties2.empty? %>
-  				<%#= flash[:alert] = "You have been to any parties." %>
-  			<% #else %>
-
-
-			<table class = 'table table-hover' style="background:#ffffff;">
-				<tbody>
-					<tr style = "font-weight: 900">
-						<td style = "padding-left: 70px;"> Party Name </td>
-						<td style = "padding-right: 28px;"> Date </td>
-						<td style = "padding-right: 8px;"> Location </td>
-					</tr>
-				</tbody>
-			</table>
-		</div>	
-		
-		<div class="well">
-			<table class='table table-hover'>
-				<tbody class ="list" style ="font-weight:bold;">
-
-
-					<% #@parties2.each_with_index do |party, index| %>
-					<tr>
-
-						<td style = "padding-left: 40px;">
-							<%#= "#{index+1}" %>
-						</td>
-
-						<td>
-							<#%= party.name %>
-						</td>
-
-						<td>
-							<#%= party.date %>
-						</td>
-
-						</td>
-
-						<td style = "width:250px; padding-left: 80px;">
-							<#%= party.location %>
-
-						</td>
-
-					</tr>
-					<#% end %>  
-				</tbody>
-			</table>
-			<#% end %> 
-	--> 
-		
-		</div>
-	</div>
+			</tr>
+			<% end %> 
+		</tbody>
+	</table>
 </div>
+<div class ="span11">
+	<h2> Parties You Attended </h2>
+</div>
+
 
 </div>
 
 
-<div class ="bgImage"><%= image_tag("dj.png") %></div>
+
 
