@@ -1,41 +1,44 @@
 
-	<table class = 'table table-hover' style="background:#ffffff;">
-				<tbody>
-					<tr style = "font-weight: 900">
-						<td style = "padding-left: 70px;"> Party Name </td>
-						<td style = "padding-right: 28px;"> Location </td>
-						<td style = "padding-right: 8px;"> Date </td>
-					</tr>
-				</tbody>
-			</table>
-		</div>	
-		
-		<div class="well">
-			<table class='table table-hover'>
-				<tbody class ="list" style ="font-weight:bold;">
+<table class = 'table table-hover'>
+	<tbody>
+		<tr style = "font-weight: 900">
+			<td style = "padding-left: 70px;"> Party Name </td>
+			<td style = "padding-right: 28px;"> Location </td>
+			<td style = "padding-right: 8px;"> Date </td>
+		</tr>
+	</tbody>
+</table>
+</div>	
+
+<div class="well">
+	<table class='table table-hover'>
+		<tbody class ="list" style ="font-weight:bold;">
 
 
-					<% @party_profile.each_with_index do |p, index| %>
-					<tr>
+			<% @party_profile.each_with_index do |p, index| %>
+			<tr>
 
-						<td style = "padding-left: 40px;">
-							<%= "#{index+1}" %>
-						</td>
+				<td style = "padding-left: 40px;">
+					<%= "#{index+1}" %>
+				</td>
 
-						<td>
-							<%= link_to(p.name, party_profile_path(p)) %>
-						</td>
+				<td>
+					<%= link_to(p.name, party_profile_path(p)) %>
+				</td>
 
-						<td>
-							<%= p.location %>
-						</td>
+				<td>
+					<%= p.location %>
+				</td>
 
-						</td>
 
-						<td style = "width:250px; padding-left: 80px;">
-							<%= p.date %>
+				<td style = "width:250px; padding-left: 80px;">
+					<%= p.date %>
 
-						</td>
+				</td>
 
-					</tr>
-					<% end %>
+			</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
+

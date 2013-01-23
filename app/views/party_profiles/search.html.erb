@@ -2,6 +2,17 @@
 	<div class="well" id="spotify">		
 		<h1>Find a Party</h1>
 		<br>
-		<%= render 'search' %>
-		
+		<form action='/search'>
+			<input name="name" type="text" placeholder="Enter Party Name..."/>
+			<br>
+			<input type='submit' value='Search' class="btn btn-primary"/>
+		</form>		
+
+		<div class ="search">
+		</div>
+
+	</div>
+</div>
+
+
 

@@ -43,8 +43,39 @@
 	</table>
 </div>
 
-<div class ="well">
+<div class="well">
 	<h2> Parties You Attended </h2>
+	<div>
+		<table class = 'table table-hover' >
+			<tbody>
+				<tr style = "font-weight: 900">
+					<td style = "padding-left: 70px;"> Party Name </td>
+					<td style = "padding-right: 28px;"> Date </td>
+					<td style = "padding-right: 8px;"> Location </td>
+				</tr>
+			</tbody>
+		</table>
+	</div>	
+
+	<table class='table table-hover'>
+		<tbody class ="list" style ="font-weight:bold;">
+
+
+			<% @parties_guest.each_with_index do |party, index| %>
+			<tr>
+
+				<td style = "padding-left: 40px;">
+					<%= "#{index+1}" %>
+				</td>
+
+				<td>
+					<%= party.party_profile_id %>
+				</td>
+
+			</tr>
+			<% end %> 
+		</tbody>
+	</table>
 </div>
 
 <div class ="bgImage"><%= image_tag("dj.png") %></div>
