@@ -1,27 +1,28 @@
 <div class="span12">
 	<div class="well" id="spotify">
 		<h1>Start A Party</h1>
-	
+
 		<%= form_for(@party_profile) do |u|%>
 		<p>
-		  <%= u.label :name %><%= u.text_field :name %>
+			<%= u.label :name %><%= u.text_field :name %>
 		</p>
 
 		<p>
-		  <%= u.label :location %><%= u.text_field :location %>
+			<%= u.label :location %><%= u.text_field :location %>
 		</p>
 
 		<p>
-		  <%= u.label :date %> <%= u.text_field :date, :placeholder => 'dd/mm/yyyy' %>
+			<%= u.label :date %> <%= u.text_field :date, :placeholder => 'dd/mm/yyyy' %>
 		</p>
 
 		<p>
-		  <%= u.label :password %> <%= u.text_field :password %>
+			<%= u.label :password %> <%= u.text_field :password %>
 		</p>
 
-		  <%= u.submit "Let's Party!", :class => "btn btn-primary" %>
-	<% end %>
-	<br>
+		<%= u.submit "Let's Party!", :class => "btn btn-primary" %>
+		<% end %>
+		<br>
+		<br>
 	</div>
 </div>
 

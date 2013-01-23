@@ -10,21 +10,16 @@ class UsersController < ApplicationController
 
   # queries database for parties associated with user to display on their homepage
   def show
-
-    @parties_hosted = PartyProfile.new
+    # find all the parties hosted
     @parties_hosted = PartyProfile.find_all_by_host(current_user.id)
+    puts @parties_hosted
     if @parties_hosted.empty?
       flash.now[:alert] = "You have not thrown any parties. Start a party?"
     end
 
-    @parties_guest 
-   # @guest = Guest.find_all_by_user_id(current_user.id)
-    #  unless @guest.empty?
-   #     params[:guest].each do |i|
-     #     @parties2 = PartyProfile.find_all_by_id(guest.party_profile_id) 
-     #   @parties_guest = PartyProfiles.find_all_by_id(@guest.party_profile_id)
-      #  end
-     # end 
+    # find all the parties attended
+    @parties_guest  = Guest.find_all_by_user_id(current_user.id)
+    #@parties_attended = PartyProfile.find_all_by_party_profile_id()
   end
 
   def index
