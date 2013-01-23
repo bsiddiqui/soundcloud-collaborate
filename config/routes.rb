@@ -4,6 +4,7 @@ PlayedbyMeHh::Application.routes.draw do
 
   get "static_pages/new"
 
+
   get "/parties/search", :to => 'party_profiles#search'
 
   get "/search", :to => 'party_profiles#display'
@@ -18,8 +19,12 @@ PlayedbyMeHh::Application.routes.draw do
     end
   end
 
-
-  resources :songs
+  post "/songs/search", :to => 'songs#search'
+  resources :songs do
+    member do
+      post :search
+    end
+  end
 
 
   resources :users

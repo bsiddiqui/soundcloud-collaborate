@@ -1,0 +1,20 @@
+<h2>You have searched for: <%="#{params[:song][:name]}" %></h2>
+<br>
+<br>
+
+<% @tracks.each_with_index do |t, index| %>
+          <tr>
+
+            <td style = "padding-left: 40px;">
+              <%= "#{index+1}" %>
+            </td>
+
+            <td>
+              <%= t.title %><br>
+            </td>
+            <br>
+
+    
+
+          </tr>
+          <% end %>

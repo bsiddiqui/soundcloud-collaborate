@@ -1,6 +1,9 @@
 class SongsController < ApplicationController
   # GET /songs
   # GET /songs.json
+
+  require 'soundcloud'
+
   def index
     @songs = Song.all
 
@@ -26,9 +29,17 @@ class SongsController < ApplicationController
     end
   end
 
+  def search
+   # @song = Song.new
+    client = Soundcloud.new(:client_id => '38442c42728e142332656494cd2f8589')
+    @tracks = client.get('/tracks', :q => params[:song][:name], :order => 'hotness')
+  end
+
+
   # GET /songs/new
   # GET /songs/new.json
   def new
+
   end
 
   # GET /songs/1/edit

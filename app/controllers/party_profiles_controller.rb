@@ -15,6 +15,7 @@ class PartyProfilesController < ApplicationController
   # GET /party_profiles/1
   # GET /party_profiles/1.json
   def show
+    @song = Song.new
     @party_profile = PartyProfile.includes(:songs).where("id = ?", params[:id]).first
     @songs = (@party_profile.songs.where("played = ?", "false")).sort! { |a,b| b[:totalVotes] <=> a[:totalVotes]}
     #@party_tracks = @party.party_tracks
@@ -58,7 +59,7 @@ end
     party_profile.host = current_user
 
   #    respond_to do |format|
-  if party_profile.save
+  if party_profile.save!
     redirect_to party_profile_path(party_profile)
  #        format.html {redirect_to party_profile_path(@party_profile), :notice => "Your party has been created."}
 
