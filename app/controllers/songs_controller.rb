@@ -33,14 +33,30 @@ class SongsController < ApplicationController
    # @song = Song.new
     client = Soundcloud.new(:client_id => '38442c42728e142332656494cd2f8589')
     @tracks = client.get('/tracks', :q => params[:song][:name], :order => 'hotness')
+    @party_profile_id = params[:song][:party_profile_id]
   end
 
 
   # GET /songs/new
   # GET /songs/new.json
   def new
+    
+    @song = Song.new(:name => params[:name],
+      :soundcloud_id => params[:soundcloud_id], 
+      :length => params[:length],
+      :totalVotes => 0,
+      :user_id => current_user.id,
+      :party_profile_id => params[:party_profile_id])
 
+    if @song.save
+      
+    else
+      flash.now[:alert] = "Could not add song."
+    end
+    
+    redirect_to party_profile_path(params[:party_profile_id])
   end
+
 
   # GET /songs/1/edit
   def edit
@@ -73,10 +89,12 @@ class SongsController < ApplicationController
   # DELETE /songs/1
   # DELETE /songs/1.json
   def destroy
-    @song = Song.find_by_party_id_and_name(params[:party_id], params[:name])
-    unless post.empty?
+    @song = Song.find_by_party_profile_id_and_name(params[:party_profile_id], params[:name])
+ #  if @song.empty?
+#      redirect_to(:back)
+ #   else
       @song.destroy
-    end
-    redirect_to(:back)
-  end
+      redirect_to(:back)
+#  end
+end
 end

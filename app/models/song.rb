@@ -1,5 +1,5 @@
 class Song < ActiveRecord::Base
-  attr_accessible :artist, :downVotes, :length, :name, :party_profile_id, :played, :totalVotes, :upVotes, :user_id
+  attr_accessible :artist, :downVotes, :length, :name, :party_profile_id, :played, :totalVotes, :upVotes, :user_id, :soundcloud_id
 
   #validates_presence_of :party_profile_id, :name, :artist
 

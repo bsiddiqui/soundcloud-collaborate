@@ -6,11 +6,16 @@
           <tr>
 
             <td style = "padding-left: 40px;">
-              <%= "#{index+1}" %>
+              <%= "#{index+1}" %>.  
             </td>
 
             <td>
-              <%= t.title %><br>
+              <%= t.title %>
+            </td>
+
+
+            <td>
+              <h5 ><%= link_to "Add" , "#{new_song_url}?name=#{t.title}&soundcloud_id=#{t.id}&length=#{t.duration}&party_profile_id=#{@party_profile_id}", :class => "btn btn-mini btn-primary" %></h5>
             </td>
             <br>
 

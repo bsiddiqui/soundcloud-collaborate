@@ -11,6 +11,7 @@ PlayedbyMeHh::Application.routes.draw do
  
   get "party_profiles/display", :to => 'party_profiles#display'
 
+get '/songs', :to => 'songs#show'
 
   resources :guests
 

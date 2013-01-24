@@ -2,6 +2,7 @@
 
 <%= form_for [@song], :url => "/songs/search" do |f| %>
 		<%= f.text_field :name %><br>
+		<%= f.hidden_field :party_profile_id, {:value => @party_profile.id} %>
 		<%= f.submit "Search Songs",  :class => "btn btn-primary" %>
 		<% end %>
    

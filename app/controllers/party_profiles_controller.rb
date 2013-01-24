@@ -16,8 +16,9 @@ class PartyProfilesController < ApplicationController
   # GET /party_profiles/1.json
   def show
     @song = Song.new
-    @party_profile = PartyProfile.includes(:songs).where("id = ?", params[:id]).first
-    @songs = (@party_profile.songs.where("played = ?", "false")).sort! { |a,b| b[:totalVotes] <=> a[:totalVotes]}
+    @party_profile = PartyProfile.where("id = ?", params[:id]).first
+    @songs = Song.where("played = ? AND party_profile_id = ?", false, @party_profile.id).all
+    @playlist = @songs.sort! { |a,b| b[:totalVotes] <=> a[:totalVotes]}
   end
 
   # GET /party_profiles/new
