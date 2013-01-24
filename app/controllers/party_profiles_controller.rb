@@ -34,11 +34,15 @@ class PartyProfilesController < ApplicationController
 
   def display
     @party_profile = PartyProfile.find_all_by_name(params[:name])
-    if @party_profile.empty?
-      redirect_to "/parties/search"
-      flash[:alert] = "This party does not seem to exist. Try again."
-    else
+    if request.xhr?
       render :partial => 'searchresults', :locals => {:party_profile => @party_profile, :name => params[:name]}
+    else
+      if @party_profile.empty?
+        redirect_to "/parties/search"
+        flash[:alert] = "This party does not seem to exist. Try again."
+      else
+        render :partial => 'searchresults', :locals => {:party_profile => @party_profile, :name => params[:name]}
+      end
     end
   end
 

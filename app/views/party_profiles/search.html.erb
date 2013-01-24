@@ -3,16 +3,38 @@
 		<h1>Find a Party</h1>
 		<br>
 		<form action='/search'>
-			<input name="name" type="text" placeholder="Enter Party Name..."/>
+			<input id="searchentry" name="name" type="text" placeholder="Enter Party Name..."/>
 			<br>
-			<input type='submit' value='Search' class="btn btn-primary"/>
+			<input id="search" type='submit' value='Search' class="btn btn-primary"/>
 		</form>		
 
-		<div class ="search">
+		<div class="search_table" style="display: none">
+			<table class = 'table table-hover'>
+				<tbody>
+					<tr style = "font-weight: 900">
+						<td style = "padding-left: 70px;"> Party Name </td>
+						<td style = "padding-right: 28px;"> Location </td>
+						<td style = "padding-right: 8px;"> Date </td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="search_results">
+			</div>
 		</div>
-
 	</div>
 </div>
 
-
+<script>
+	$('#search').click(function(event) 
+	{
+		$.get('/party_profiles/display?name='+$('#searchentry').val(), function(data) 
+		{
+			console.log(data);
+			$('.search_results').html('');
+			$('.search_results').append(data);
+			$('.search_table').show();
+		});
+		return false
+	});
+</script>
 

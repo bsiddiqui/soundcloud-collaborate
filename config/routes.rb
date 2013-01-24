@@ -8,6 +8,9 @@ PlayedbyMeHh::Application.routes.draw do
   get "/parties/search", :to => 'party_profiles#search'
 
   get "/search", :to => 'party_profiles#display'
+ 
+  get "party_profiles/display", :to => 'party_profiles#display'
+
 
   resources :guests
 
@@ -16,6 +19,7 @@ PlayedbyMeHh::Application.routes.draw do
     member do
       get :search
       get :display
+      get :displayresults
     end
   end
 
