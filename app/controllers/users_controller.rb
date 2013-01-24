@@ -17,11 +17,7 @@ class UsersController < ApplicationController
     end
 
     # find all the parties attended
-    # @parties_guest  = Guest.find_all_by_user_id(current_user.id)
     @parties_guest  = current_user.party_profiles
-    puts @parties_guest
-    puts "hello"
-
   end
 
   def index
