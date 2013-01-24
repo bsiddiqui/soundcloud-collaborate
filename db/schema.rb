@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130122193445) do
+ActiveRecord::Schema.define(:version => 20130123234348) do
 
   create_table "guests", :force => true do |t|
     t.string   "user_id"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(:version => 20130122193445) do
     t.string   "name"
     t.string   "password"
     t.string   "location"
-    t.datetime "date"
+    t.date     "date"
     t.string   "host"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

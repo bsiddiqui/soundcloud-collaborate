@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   
   validates_uniqueness_of :uid
   
-  has_many :parties
+  has_and_belongs_to_many :party_profiles, :join_table => 'guests'
+
 
 end

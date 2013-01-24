@@ -18,30 +18,21 @@ class PartyProfilesController < ApplicationController
     @song = Song.new
     @party_profile = PartyProfile.includes(:songs).where("id = ?", params[:id]).first
     @songs = (@party_profile.songs.where("played = ?", "false")).sort! { |a,b| b[:totalVotes] <=> a[:totalVotes]}
-    #@party_tracks = @party.party_tracks
   end
 
   # GET /party_profiles/new
   # GET /party_profiles/new.json
   def new
     @party_profile = PartyProfile.new 
- #   render :partial => 'form', :locals => {:party_profile => @party_profile}
   end
 
 
-def search
-  @party_profile = PartyProfile.new
-end
+  def search
+    @party_profile = PartyProfile.new
+  end
 
 
-    #.sort_by(&:name.downcase)
-  #  if @party != nil
-      #AJAX redirect_to party_path(@party)
-   # else
-    #  redirect_to (:back), :alert => "Nobody seems to be throwing that party! Try again."
-   # end
-
-   def display
+  def display
     @party_profile = PartyProfile.find_all_by_name(params[:name])
     if @party_profile.empty?
       redirect_to "/parties/search"
@@ -57,22 +48,14 @@ end
   def create
     party_profile = PartyProfile.new(params[:party_profile]) 
     party_profile.host = current_user
+    if party_profile.save!
+      redirect_to party_profile_path(party_profile)
 
-  #    respond_to do |format|
-  if party_profile.save!
-    redirect_to party_profile_path(party_profile)
- #        format.html {redirect_to party_profile_path(@party_profile), :notice => "Your party has been created."}
-
-else 
-#          format.html {render partial: 'form', flash[:notice] => "fail"}
-          #format.json {render json: @party_profile.errors, status: :unprocessable_entity }
-         # format.js { render action: 'reload' }
-         redirect_to new_party_profile_path
-         flash[:alert] = "Please fill out all of the fields."
-       end
-  #   end
-
-end
+    else 
+     redirect_to new_party_profile_path
+     flash[:alert] = "Please fill out all of the fields."
+   end
+ end
 
 
 

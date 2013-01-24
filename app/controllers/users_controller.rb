@@ -12,14 +12,16 @@ class UsersController < ApplicationController
   def show
     # find all the parties hosted
     @parties_hosted = PartyProfile.find_all_by_host(current_user.id)
-    puts @parties_hosted
     if @parties_hosted.empty?
       flash.now[:alert] = "You have not thrown any parties. Start a party?"
     end
 
     # find all the parties attended
-    @parties_guest  = Guest.find_all_by_user_id(current_user.id)
-    #@parties_attended = PartyProfile.find_all_by_party_profile_id()
+    # @parties_guest  = Guest.find_all_by_user_id(current_user.id)
+    @parties_guest  = current_user.party_profiles
+    puts @parties_guest
+    puts "hello"
+
   end
 
   def index

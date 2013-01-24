@@ -4,6 +4,6 @@ class PartyProfile < ActiveRecord::Base
   validates_presence_of :name, :location, :date, :password, :host
 
   has_many :songs
-  has_many :guests
+  has_and_belongs_to_many :users, :join_table => 'guests'
 
 end
