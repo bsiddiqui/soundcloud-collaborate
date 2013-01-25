@@ -4,7 +4,6 @@ PlayedbyMeHh::Application.routes.draw do
 
   get "static_pages/new"
 
-
   get "/parties/search", :to => 'party_profiles#search'
 
   get "/search", :to => 'party_profiles#display'
@@ -26,10 +25,11 @@ get '/songs', :to => 'songs#show'
     end
   end
 
-  post "/songs/search", :to => 'songs#search'
+
+  get "/searchsongs", :to => 'songs#search'
   resources :songs do
     member do
-      post :search
+      get :search
     end
   end
 

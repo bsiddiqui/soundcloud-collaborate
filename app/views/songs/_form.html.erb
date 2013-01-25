@@ -1,0 +1,42 @@
+    <tr>
+      <td class = "td">
+        <div class = "delete">
+          <%= button_to "X", { :controller => "songs", :action => "destroy", :party_profile_id => @song.party_profile_id, :name => @song.name}, :confirm => "Delete this song?", :method => :delete, :class => "btn btn-inverse" %>
+        </div> 
+      </td>
+      <td>
+        <%= "#{i+1}" %>.
+
+        <%= @song.name %>   
+      </td>
+
+      <td>
+        <div class = "button2"> 
+          <span style = "float:right;"> 
+
+            <%= form_for [@song], :html => {:method => 'get'} do |f|%>
+
+            <%= f.hidden_field :name, {:value => @song.name} %>
+            <%= f.hidden_field :party_profile_id, {:value => @song.party_profile_id} %>
+            <%= f.submit "Down", :class => "btn btn-danger" %>
+            <% end %>
+          </span>
+          <div class = "buttons_holder">
+            <div class = "button1">
+              <span style = "float:right;">
+                <%= form_for [@song], :html => {:method => 'get'} do |f|%>
+                <%= f.hidden_field :name, {:value => @song.name}%>
+                <%= f.hidden_field :party_profile_id, {:value => @song.party_profile_id}%>
+                <%= f.submit "Up", :class => "btn btn-success" %>
+                <% end %>   
+              </span> 
+            </div>
+
+            <span style = "float:left;">
+              <%= @song.totalVotes %>
+            </span>
+
+          </div>
+        </div>
+      </td>
+    </tr>

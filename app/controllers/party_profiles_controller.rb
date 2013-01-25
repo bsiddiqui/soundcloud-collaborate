@@ -22,10 +22,12 @@ require 'soundcloud'
     
     unless @playlist.empty?
       @firstsong=@playlist.first.soundcloud_id
-      @playlist.first.update_attributes(:played => true)
+    end
+    
+      #@playlist.first.update_attributes(:played => true)
     #puts @playlist.first
     #puts "FIND ME"
-  end
+  
 end
 
 

@@ -32,14 +32,24 @@ class SongsController < ApplicationController
   def search
    # @song = Song.new
     client = Soundcloud.new(:client_id => '38442c42728e142332656494cd2f8589')
-    @tracks = client.get('/tracks', :q => params[:song][:name], :order => 'hotness')
-    @party_profile_id = params[:song][:party_profile_id]
+    if request.xhr?
+      @tracks = client.get('/tracks', :q => params[:name], :order => 'hotness', :limit => 10)
+      @party_profile_id = params[:party_profile_id]
+      render :partial => 'search', :locals => {:name => params[:name]}
+    else
+      @tracks = client.get('/tracks', :q => params[:name], :order => 'hotness', :limit => 10)
+      @party_profile_id = params[:party_profile_id]
+      render :partial => 'search'
+    end
+
   end
 
 
   # GET /songs/new
   # GET /songs/new.json
   def new
+
+   # render :action => 'create'
     
     @song = Song.new(:name => params[:name],
       :soundcloud_id => params[:soundcloud_id], 
@@ -49,12 +59,14 @@ class SongsController < ApplicationController
       :party_profile_id => params[:party_profile_id])
 
     if @song.save
-      
+        respond_to do |format|
+        format.js 
+      end
     else
       flash.now[:alert] = "Could not add song."
     end
-    
-    redirect_to party_profile_path(params[:party_profile_id])
+    #render :partial => 'parties/songs'
+    #redirect_to party_profile_path(params[:party_profile_id])
   end
 
 
