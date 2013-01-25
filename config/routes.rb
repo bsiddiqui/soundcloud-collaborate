@@ -14,6 +14,8 @@ PlayedbyMeHh::Application.routes.draw do
 
   resources :guests
 
+  resources :api_parties 
+
 
   resources :party_profiles do
     member do
