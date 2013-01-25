@@ -15,6 +15,8 @@ get '/songs', :to => 'songs#show'
 
   resources :guests
 
+  resources :api_parties 
+
 
   resources :party_profiles do
     member do
