@@ -81,6 +81,16 @@ end
    end
  end
 
+def showplaylist
+      @song = Song.new
+    @party_profile = PartyProfile.where("id = ?", params[:id]).first
+    @songs = Song.where("played = ? AND party_profile_id = ?", false, @party_profile.id).all
+    @playlist = @songs.sort! { |a,b| b[:totalVotes] <=> a[:totalVotes]}
+    render :partial => 'showplaylist'
+    unless @playlist.empty?
+      @firstsong=@playlist.first.soundcloud_id
+    end
+end
 
 
   # PUT /party_profiles/1

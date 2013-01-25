@@ -20,12 +20,12 @@ class SongsController < ApplicationController
     if params[:commit] == "Up"
       @votecount = @song.totalVotes.to_i + 1
       @song.update_attribute(:totalVotes, @votecount)
-      redirect_to(:back)
+#      redirect_to(:back)
     end
     if params[:commit] == "Down"
       @votecount = @song.totalVotes.to_i - 1
       @song.update_attribute(:totalVotes, @votecount)
-      redirect_to(:back)
+ #     redirect_to(:back)
     end
   end
 
@@ -60,7 +60,6 @@ class SongsController < ApplicationController
 
     if @song.save
         respond_to do |format|
-        format.js 
       end
     else
       flash.now[:alert] = "Could not add song."
@@ -106,7 +105,7 @@ class SongsController < ApplicationController
 #      redirect_to(:back)
  #   else
       @song.destroy
-      redirect_to(:back)
+#      redirect_to(:back)
 #  end
 end
 end

@@ -16,9 +16,11 @@ get '/songs', :to => 'songs#show'
 
   resources :api_parties 
 
+  get "/party_profiles/:id/_showplaylist", :to => 'party_profiles#showplaylist'
 
   resources :party_profiles do
     member do
+      get :showplaylist
       get :search
       get :display
       get :displayresults

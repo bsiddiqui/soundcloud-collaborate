@@ -44,7 +44,7 @@
           <tr>
             <td class = "td">
               <div class = "delete">
-                <%= button_to "X", { :controller => "songs", :action => "destroy", :party_profile_id => s.party_profile_id, :name => s.name}, :confirm => "Delete this song?", :method => :delete, :class => "btn btn-inverse" %>
+                <%= button_to "X", { :controller => "songs", :action => "destroy", :party_profile_id => s.party_profile_id, :name => s.name}, :confirm => "Delete this song?", :method => :delete, :remote => true, :class => "btn btn-inverse refreshbutton" %>
               </div> 
             </td>
             <td>
@@ -57,20 +57,20 @@
               <div class = "button2"> 
                 <span style = "float:right;"> 
 
-                  <%= form_for [@song], :html => {:method => 'get'} do |f|%>
+                  <%= form_for [@song], :html => {:method => 'get'}, :remote => true do |f|%>
 
                   <%= f.hidden_field :name, {:value => s.name} %>
                   <%= f.hidden_field :party_profile_id, {:value => s.party_profile_id} %>
-                  <%= f.submit "Down", :class => "btn btn-danger" %>
+                  <%= f.submit "Down", :class => "btn btn-danger refreshbutton" %>
                   <% end %>
                 </span>
                 <div class = "buttons_holder">
                   <div class = "button1">
                     <span style = "float:right;">
-                      <%= form_for [@song], :html => {:method => 'get'} do |f|%>
+                      <%= form_for [@song], :html => {:method => 'get'}, :remote => true do |f|%>
                       <%= f.hidden_field :name, {:value => s.name}%>
                       <%= f.hidden_field :party_profile_id, {:value => s.party_profile_id}%>
-                      <%= f.submit "Up", :class => "btn btn-success" %>
+                      <%= f.submit "Up", :class => "btn btn-success refreshbutton" %>
                       <% end %>   
                     </span> 
                   </div>
@@ -91,6 +91,25 @@
 </div>
 
 <script>
+
+   function refreshPlaylist()
+    {
+
+      var partyid = <%= @party_profile.id %>;
+      var url = "/party_profiles/" + partyid + "/_showplaylist";
+
+      $.ajax({
+          url: url, 
+          success: function(data) {
+
+            $(".playlist").html(data);
+          }
+          }
+        );
+        alert("hello")
+
+    };
+
 $('#songsearch').click(function(event) 
 {
   var name = $('#songname').val()
@@ -99,8 +118,15 @@ $('#songsearch').click(function(event)
     console.log(data);
     $('.song_results').html('');
     $('.song_results').append(data);
-  });
-  return false
+    $(".addsong").click(refreshPlaylist);
+
 });
+return false
+});
+
+$(".refreshbutton").click(refreshPlaylist);
+
+
+
 </script>
 
