@@ -1,5 +1,5 @@
 class PartyProfilesController < ApplicationController
-
+require 'soundcloud'
   before_filter :authenticate_user!, :except => :index
   # GET /party_profiles
   # GET /party_profiles.json
@@ -19,7 +19,24 @@ class PartyProfilesController < ApplicationController
     @party_profile = PartyProfile.where("id = ?", params[:id]).first
     @songs = Song.where("played = ? AND party_profile_id = ?", false, @party_profile.id).all
     @playlist = @songs.sort! { |a,b| b[:totalVotes] <=> a[:totalVotes]}
+    
+    unless @playlist.empty?
+      @firstsong=@playlist.first.soundcloud_id
+      @playlist.first.update_attributes(:played => true)
+    #puts @playlist.first
+    #puts "FIND ME"
   end
+end
+
+
+
+#    unless @playlist.empty?
+ #     respond_to do |format|
+  #      format.html 
+#      format.json { render json: @party_profile }
+ #   end
+  #end
+  #end
 
   # GET /party_profiles/new
   # GET /party_profiles/new.json
