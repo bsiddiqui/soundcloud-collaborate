@@ -14,7 +14,6 @@
 <div class="span12">
   <div class="well">
     <h3> Add Songs</h3>
-    <h3> Add Songs</h3>
 
     <form action='/searchsongs'>
       <input id="songname" name="name" type="text" placeholder="Enter Song Name"/>
@@ -124,12 +123,29 @@ $(refreshPlaylist);
 
 $(function(){
     var widget = SC.Widget("sc-widget");
+    
     widget.bind('pause', function() {
         // code that executes when the function pauses
     });
 
+
     widget.bind('play', function() {
-      // code that executes when the function plays
+        // code that executes when the function plays
+        alert("song played");
+        $.ajax({
+          url: "/songs/songplayed?soundcloud_id=" + soundcloud_id + "&party_profile_id=" + party_profile_id , 
+          success: function() {
+            refreshPlaylist();
+          // update whatever information you need to update here, 
+          // that may involve a call to refreshPlaylist();
+          }
+
+      })
+    });
+
+
+    widget.bind('finish', function() {
+      // code that executes when the function finishes
       $.ajax({
           url: YOUR_CONTROLLER_METHOD, 
           success: function() {
@@ -138,6 +154,7 @@ $(function(){
           }
       })
     })
+
 
 })
 
