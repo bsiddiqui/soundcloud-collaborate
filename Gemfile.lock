@@ -168,6 +168,7 @@ DEPENDENCIES
   httparty
   jquery-rails
   less-rails
+  mail
   multipart-post
   omniauth
   omniauth-facebook

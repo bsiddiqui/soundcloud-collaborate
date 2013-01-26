@@ -6,26 +6,23 @@
 			<% @party_profile.each_with_index do |p, index| %>
 			<tr>
 
-				<td style = "padding-left: 40px;">
-					<%= "#{index+1}" %>
-				</td>
-
-				<td>
-					<%= p.name %>
-				</td>
-
-				<td>
-					<%= p.location %>
-				</td>
-
-
-				<td style = "width:250px; padding-left: 80px;">
-					<%= p.date %>
-				</td>
 				<td>
 					<%= link_to "Join!", "/partyprofiles?party_profile_id=#{p.id}", :class => "btn btn-mini btn-primary"%>
 
 				</td>
+
+				<td style = "padding-right: 250px; text-align: left;">
+					 <%= p.name %>
+				</td>
+
+				<td style = "width:90px; padding-right: 210px; text-align: center;">
+					<%= p.date %>
+				</td>
+
+				<td style = "width:150px; padding-left: 50px;">
+					<%= p.location %>
+				</td>
+
 
 			</tr>
 			<% end %>

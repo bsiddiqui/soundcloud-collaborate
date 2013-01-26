@@ -3,9 +3,19 @@
   <script src="http://code.jquery.com/jquery-latest.js"></script>
   <title><%= content_for?(:title) ? yield(:title) : "PlayedBy.Me" %></title>
   <%= stylesheet_link_tag "application", :media => "all" %>
+
 </head>
 
 <body class="font">
+
+  <script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <div class="navbar">
     <div class="navbar-inner">
       <div class="container">
@@ -28,7 +38,9 @@
             <li><%= link_to "Start a Party",  new_party_profile_path  %></li>
             <li><%= link_to "About", static_pages_new_path  %></li>
           </ul>
+
           <ul class="nav pull-right">
+               <div class="fb-like" data-href="http://www.playedby.me" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial" padding-top: 10px></div>
             <% if current_user %>
             <li><%= link_to "Logout", user_path(current_user), :method => :delete  %></li>
             <% else %>

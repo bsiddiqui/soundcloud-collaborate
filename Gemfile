@@ -27,6 +27,7 @@ group :assets do
   gem 'multipart-post'
   gem 'hashie'
   gem 'soundcloud'
+  gem 'mail'
 
 end
 
