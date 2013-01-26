@@ -1,12 +1,12 @@
 <div class="well">
-	<h2> Parties You Hosted </h2>
+	<h2 style="text-align:center;"> Parties You Hosted </h2>
 	<div>
 		<table class = 'table table-hover' >
 			<tbody>
-				<tr style = "font-weight: 900">
-					<td style = "padding-left: 70px;"> Party Name </td>
-					<td style = "padding-right: 28px;"> Date </td>
-					<td style = "padding-right: 8px;"> Location </td>
+				<tr id="tableheader" style = "font-weight: 900">
+					<td id="parties" style = "padding-left: 80px;"> Party Name </td>
+					<td id="parties" style = "padding-right: 82px;"> Date </td>
+					<td id="parties" style = "padding-right: 8px;"> Location </td>	
 				</tr>
 			</tbody>
 		</table>
@@ -19,21 +19,16 @@
 			<% @parties_hosted.each_with_index do |party, index| %>
 			<tr>
 
-				<td style = "padding-left: 40px;">
-					<%= "#{index+1}" %>
+				<td style = "padding-left: 90px; text-align: left;">
+					 <%= party.name %>
 				</td>
 
-				<td style= "width: 140px; padding-left: 20px">
-					<%= link_to(party.name, party_profile_path(party))%>
-				</td>
-
-				<td>
+				<td style = "width:90px; padding-right: 250px; text-align: left;">
 					<%= party.date %>
 				</td>
 
-				<td style = "width:250px; padding-left: 80px;">
+				<td style = "width:150px; padding-right: 20px;">
 					<%= party.location %>
-
 				</td>
 
 			</tr>
@@ -43,14 +38,14 @@
 </div>
 
 <div class="well">
-	<h2> Parties You Attended </h2>
+	<h2 style="text-align:center;"> Parties You Attended </h2>
 	<div>
 		<table class = 'table table-hover' >
 			<tbody>
-				<tr style = "font-weight: 900">
-					<td style = "padding-left: 70px;"> Party Name </td>
-					<td style = "padding-right: 28px;"> Date </td>
-					<td style = "padding-right: 8px;"> Location </td>
+				<tr id='tableheader' style = "font-weight: 900">
+					<td id="parties" style = "padding-left: 80px;"> Party Name </td>
+					<td id="parties" style = "padding-right: 82px;"> Date </td>
+					<td id="parties" style = "padding-right: 8px;"> Location </td>
 				</tr>
 			</tbody>
 		</table>
@@ -63,19 +58,15 @@
 			<% @parties_guest.each_with_index do |party, index| %>
 			<tr>
 
-				<td style = "padding-left: 40px;">
-					<%= "#{index+1}" %>
+				<td style = "padding-left: 90px; text-align: left;">
+					 <%= party.name %>
 				</td>
 
-				<td style= "width: 140px; padding-left: 20px">
-					<%= party.name %>
-				</td>
-
-				<td>
+				<td style = "width:90px; padding-right: 250px; text-align: left;">
 					<%= party.date %>
 				</td>
 
-				<td style = "width:250px; padding-left: 80px;">
+				<td style = "width:150px; padding-right: 20px;">
 					<%= party.location %>
 				</td>
 
