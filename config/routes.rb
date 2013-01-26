@@ -27,7 +27,8 @@ PlayedbyMeHh::Application.routes.draw do
     end
   end
 
-  get '/songs/songplayed?soundcloud_id=:soundcloud_id&party_profile_id=:party_profile_id', :to => 'songs#songplayed'
+  get '/songplayed', :to => 'songs#songplayed'
+  get '/songplayed?soundcloud_id=:soundcloud_id&party_profile_id=:party_profile_id', :to => 'songs#songplayed'
   get '/songs/destroy?name=:name&party_profile_id=:party_profile_id', :to => 'songs#destroy'
   get "/searchsongs", :to => 'songs#search'
   resources :songs do

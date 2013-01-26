@@ -6,7 +6,7 @@
 
 
 <object height="81" width="100%" id="myPlayer" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
-  <iframe id="sc-widget" width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/<%= @firstsong %>&show_artwork=true&liking=false&sharing=false&frameborder="no"&scrolling="no"&enable_api=true&object_id=myPlayer"></iframe>
+  <iframe id="sc-widget" width="100%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/<%= @firstsong %>&show_artwork=true&liking=ture&sharing=true&frameborder="no"&scrolling="no"&enable_api=true&object_id=myPlayer"></iframe>
 </object>
 
 <br>
@@ -43,46 +43,45 @@
 
 <script>
 
-   function refreshPlaylist()
-    {
+function refreshPlaylist()
+{
 
-      var partyid = <%= @party_profile.id %>;
-      var url = "/party_profiles/" + partyid + "/_showplaylist";
+  var partyid = <%= @party_profile.id %>;
+  var url = "/party_profiles/" + partyid + "/_showplaylist";
 
-      $.ajax({
-          url: url, 
-          success: function(data) {
+  $.ajax({
+    url: url, 
+    success: function(data) {
+      $(".playlist").html(data);
+      var widget = SC.Widget("sc-widget");
 
-            $(".playlist").html(data);
 
-
-$(".refreshbutton").each(function(k, v) {
+      $(".refreshbutton").each(function(k, v) {
         var oldhref = $(v).attr('href');
 
         $(v).attr('href', "");
 
         $(v).click(function() {
 
-            $.ajax({
-                url: oldhref,
-                success: function() {
-                    refreshPlaylist();
-                }, 
-                error: function() {
-                  refreshPlaylist();
-                }
+          $.ajax({
+            url: oldhref,
+            success: function() {
+              refreshPlaylist();
+            }, 
+            error: function() {
+              refreshPlaylist();
+            }
 
-            })
+          })
         });
 
-    });
+      });
 
 
-          }
-          }
-        );
+    }
+  });
 
-    };
+};
 
 $('#songsearch').click(function(event) 
 {
@@ -93,70 +92,78 @@ $('#songsearch').click(function(event)
     $('.song_results').html('');
     $('.song_results').append(data);
     $(".addsong").each(function(k, v) {
-        var oldhref = $(v).attr('href');
+      var oldhref = $(v).attr('href');
 
-        $(v).attr('href', "");
+      $(v).attr('href', "");
 
-        $(v).click(function() {
+      $(v).click(function() {
 
-            $.ajax({
-                url: oldhref,
-                success: function() {
-                    refreshPlaylist();
-                }, 
-                error: function() {
-                  refreshPlaylist();
-                }
+        $.ajax({
+          url: oldhref,
+          success: function() {
+            refreshPlaylist();
+          }, 
+          error: function() {
+            refreshPlaylist();
+          }
 
-            })
-        });
+        })
+      });
 
     });
 
-});
-return false
+  });
+  return false
 });
 
 
 
 $(refreshPlaylist);
 
+
 $(function(){
-    var widget = SC.Widget("sc-widget");
-    
-    widget.bind('pause', function() {
-        // code that executes when the function pauses
-    });
+  var widget = SC.Widget("sc-widget");
+
+  widget.bind('pause', function() {
+    // code that executes when the function pauses
+  });
 
 
-    widget.bind('play', function() {
+  widget.bind('play', function() {
         // code that executes when the function plays
-        alert("song played");
-        $.ajax({
-          url: "/songs/songplayed?soundcloud_id=" + soundcloud_id + "&party_profile_id=" + party_profile_id , 
-          success: function() {
-            refreshPlaylist();
-          // update whatever information you need to update here, 
-          // that may involve a call to refreshPlaylist();
-          }
-
-      })
-    });
 
 
-    widget.bind('finish', function() {
-      // code that executes when the function finishes
-      $.ajax({
-          url: YOUR_CONTROLLER_METHOD, 
-          success: function() {
-            // update whatever information you need to update here, 
-            // that may involve a call to refreshPlaylist();
-          }
-      })
-    })
+        var soundcloudid = <%= @firstsong %>;
+        var partyid = <%= @party_profile.id %>;
+        alert(soundcloudid)
+        if (soundcloudid !== undefined) {
+          $.ajax({
+            url: "/songplayed?soundcloud_id=" + soundcloudid + "&party_profile_id=" + partyid , 
+            success: function() {
+              refreshPlaylist();
+            }
+          });
+        }
+      });
 
 
-})
+  widget.bind('finish', function() {
+        // code that executes when the function finishes
 
+        alert(<%= @nextsong %>);
+
+        var soundcloudurl = "https://api.soundcloud.com/tracks/" + <%= @nextsong %>;
+        alert(soundcloudurl)
+        widget.load(soundcloudurl, {
+          auto_play: true
+
+        });
+        /*$.ajax({
+          url: // song 
+        });*/
+
+      });
+
+});
 </script>
 

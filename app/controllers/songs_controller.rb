@@ -28,7 +28,6 @@ class SongsController < ApplicationController
 
     if params[:commit] == "X"
       @song.destroy
-      puts "DESTROYED!!!!!!"
     end
   end
 
@@ -90,9 +89,9 @@ end
   end
 
   def songplayed
-    @song = Song.where("name = ? AND party_profile_id = ?", params[:name], params[:party_profile_id]).first
+    @song = Song.where("soundcloud_id = ? AND party_profile_id = ?", params[:soundcloud_id], params[:party_profile_id]).first
     @song.update_attributes(:played => true)
-    puts "songplayed"
+    puts "songplayed!!!!!"
   end
 
 

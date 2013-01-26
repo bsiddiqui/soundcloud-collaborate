@@ -20,8 +20,15 @@ require 'soundcloud'
     @songs = Song.where("played = ? AND party_profile_id = ?", false, @party_profile.id).all
     @playlist = @songs.sort! { |a,b| b[:totalVotes] <=> a[:totalVotes]}
     
-    unless @playlist.empty?
+    if @playlist.empty?
+      @firstsong="undefined"
+    else
       @firstsong=@playlist.first.soundcloud_id
+    end
+    if @playlist.count < 2
+      @nextsong="undefined"
+    else
+      @nextsong=@playlist.second.soundcloud_id
     end
     
       #@playlist.first.update_attributes(:played => true)
@@ -87,9 +94,18 @@ def showplaylist
     @songs = Song.where("played = ? AND party_profile_id = ?", false, @party_profile.id).all
     @playlist = @songs.sort! { |a,b| b[:totalVotes] <=> a[:totalVotes]}
     render :partial => 'showplaylist'
-    unless @playlist.empty?
+
+     if @playlist.empty?
+      @firstsong="undefined"
+    else
       @firstsong=@playlist.first.soundcloud_id
     end
+    if @playlist.count < 2
+      @nextsong="undefined"
+    else
+      @nextsong=@playlist.second.soundcloud_id
+    end
+    
 end
 
 
