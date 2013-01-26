@@ -10,7 +10,7 @@ PlayedbyMeHh::Application.routes.draw do
  
   get "party_profiles/display", :to => 'party_profiles#display'
 
-get '/songs', :to => 'songs#show'
+  get '/songs', :to => 'songs#show'
 
   resources :guests
 
@@ -28,6 +28,7 @@ get '/songs', :to => 'songs#show'
   end
 
 
+  get '/songs/destroy?name=:name&party_profile_id=:party_profile_id', :to => 'songs#destroy'
   get "/searchsongs", :to => 'songs#search'
   resources :songs do
     member do

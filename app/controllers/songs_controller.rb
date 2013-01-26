@@ -16,7 +16,7 @@ class SongsController < ApplicationController
   # GET /songs/1
   # GET /songs/1.json
   def show
-    @song = Song.find_by_name_and_party_profile_id(params[:song][:name], params[:song][:party_profile_id])
+    @song = Song.find_by_name_and_party_profile_id(params[:name], params[:party_profile_id])
     if params[:commit] == "Up"
       @votecount = @song.totalVotes.to_i + 1
       @song.update_attribute(:totalVotes, @votecount)
@@ -25,24 +25,32 @@ class SongsController < ApplicationController
     if params[:commit] == "Down"
       @votecount = @song.totalVotes.to_i - 1
       @song.update_attribute(:totalVotes, @votecount)
- #     redirect_to(:back)
+     #     redirect_to(:back)
     end
-  end
 
-  def search
+    if params[:commit] == "X"
+     #  if @song.empty?
+    #      redirect_to(:back)
+     #   else
+      @song.destroy
+      puts "DESTROYED!!!!!!"
+    end
+end
+
+def search
    # @song = Song.new
-    client = Soundcloud.new(:client_id => '38442c42728e142332656494cd2f8589')
-    if request.xhr?
-      @tracks = client.get('/tracks', :q => params[:name], :order => 'hotness', :limit => 10)
-      @party_profile_id = params[:party_profile_id]
-      render :partial => 'search', :locals => {:name => params[:name]}
-    else
-      @tracks = client.get('/tracks', :q => params[:name], :order => 'hotness', :limit => 10)
-      @party_profile_id = params[:party_profile_id]
-      render :partial => 'search'
-    end
-
+   client = Soundcloud.new(:client_id => '38442c42728e142332656494cd2f8589')
+   if request.xhr?
+    @tracks = client.get('/tracks', :q => params[:name], :order => 'hotness', :limit => 10)
+    @party_profile_id = params[:party_profile_id]
+    render :partial => 'search', :locals => {:name => params[:name]}
+  else
+    @tracks = client.get('/tracks', :q => params[:name], :order => 'hotness', :limit => 10)
+    @party_profile_id = params[:party_profile_id]
+    render :partial => 'search'
   end
+
+end
 
 
   # GET /songs/new
@@ -50,15 +58,15 @@ class SongsController < ApplicationController
   def new
 
    # render :action => 'create'
-    
-    @song = Song.new(:name => params[:name],
-      :soundcloud_id => params[:soundcloud_id], 
-      :length => params[:length],
-      :totalVotes => 0,
-      :user_id => current_user.id,
-      :party_profile_id => params[:party_profile_id])
-      @song.save
-    
+
+   @song = Song.new(:name => params[:name],
+    :soundcloud_id => params[:soundcloud_id], 
+    :length => params[:length],
+    :totalVotes => 0,
+    :user_id => current_user.id,
+    :party_profile_id => params[:party_profile_id])
+   @song.save
+
     #render :partial => 'parties/songs'
     #redirect_to party_profile_path(params[:party_profile_id])
   end
@@ -95,11 +103,11 @@ class SongsController < ApplicationController
   # DELETE /songs/1
   # DELETE /songs/1.json
   def destroy
-    @song = Song.find_by_party_profile_id_and_name(params[:party_profile_id], params[:name])
+#    @song = Song.find_by_party_profile_id_and_name(params[:party_profile_id], params[:name])
  #  if @song.empty?
 #      redirect_to(:back)
  #   else
-      @song.destroy
+ #     @song.destroy
 #      redirect_to(:back)
 #  end
 end

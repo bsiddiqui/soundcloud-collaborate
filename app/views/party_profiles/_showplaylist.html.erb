@@ -1,11 +1,11 @@
-
-  <table class='table table-striped'>
+<table class='table table-striped'>
     <tbody class ="playlist-refresh">
       <% @playlist.each_with_index do |s,i| %>
       <tr>
         <td class = "td">
           <div class = "delete">
-            <%= button_to "X", { :controller => "songs", :action => "destroy", :party_profile_id => s.party_profile_id, :name => s.name}, :confirm => "Delete this song?", :method => :delete, :class => "btn btn-inverse" %>
+             <%= link_to "X" , "/songs?name=#{s.name}&party_profile_id=#{s.party_profile_id}&commit=X", :remote => true, :class => "btn btn-inverse refreshbutton" %>
+
           </div> 
         </td>
         <td>
@@ -17,22 +17,12 @@
         <td>
           <div class = "button2"> 
             <span style = "float:right;"> 
-
-              <%= form_for [@song], :html => {:method => 'get'} do |f|%>
-
-              <%= f.hidden_field :name, {:value => s.name} %>
-              <%= f.hidden_field :party_profile_id, {:value => s.party_profile_id} %>
-              <%= f.submit "Down", :class => "btn btn-danger" %>
-              <% end %>
+            <%= link_to "Down" , "/songs?name=#{s.name}&party_profile_id=#{s.party_profile_id}&commit=Down", :remote => true, :class => "btn btn-danger refreshbutton" %>
             </span>
             <div class = "buttons_holder">
               <div class = "button1">
                 <span style = "float:right;">
-                  <%= form_for [@song], :html => {:method => 'get'} do |f|%>
-                  <%= f.hidden_field :name, {:value => s.name}%>
-                  <%= f.hidden_field :party_profile_id, {:value => s.party_profile_id}%>
-                  <%= f.submit "Up", :class => "btn btn-success" %>
-                  <% end %>   
+                <%= link_to "Up" , "/songs?name=#{s.name}&party_profile_id=#{s.party_profile_id}&commit=Up", :remote => true, :class => "btn btn-success refreshbutton" %> 
                 </span> 
               </div>
 

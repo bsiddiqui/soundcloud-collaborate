@@ -94,7 +94,27 @@ $('#songsearch').click(function(event)
 return false
 });
 
-$(".refreshbutton").click(refreshPlaylist);
+$(".refreshbutton").each(function(k, v) {
+        var oldhref = $(v).attr('href');
+
+        $(v).attr('href', "");
+
+        $(v).click(function() {
+
+            $.ajax({
+                url: oldhref,
+                success: function() {
+                    refreshPlaylist();
+                }, 
+                error: function() {
+                  refreshPlaylist();
+                }
+
+            })
+        });
+
+    });
+
 $(refreshPlaylist);
 
 
