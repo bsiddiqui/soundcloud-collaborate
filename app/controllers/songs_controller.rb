@@ -57,13 +57,8 @@ class SongsController < ApplicationController
       :totalVotes => 0,
       :user_id => current_user.id,
       :party_profile_id => params[:party_profile_id])
-
-    if @song.save
-        respond_to do |format|
-      end
-    else
-      flash.now[:alert] = "Could not add song."
-    end
+      @song.save
+    
     #render :partial => 'parties/songs'
     #redirect_to party_profile_path(params[:party_profile_id])
   end

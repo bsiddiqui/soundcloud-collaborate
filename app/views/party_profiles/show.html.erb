@@ -38,54 +38,6 @@
     <h3> Playlist </h3>
     
     <div class="playlist">
-      <table class='table table-striped'>
-        <tbody class ="playlist-refresh">
-          <% @playlist.each_with_index do |s,i| %>
-          <tr>
-            <td class = "td">
-              <div class = "delete">
-                <%= button_to "X", { :controller => "songs", :action => "destroy", :party_profile_id => s.party_profile_id, :name => s.name}, :confirm => "Delete this song?", :method => :delete, :remote => true, :class => "btn btn-inverse refreshbutton" %>
-              </div> 
-            </td>
-            <td>
-              <%= "#{i+1}" %>.
-
-              <%= s.name %>   
-            </td>
-
-            <td>
-              <div class = "button2"> 
-                <span style = "float:right;"> 
-
-                  <%= form_for [@song], :html => {:method => 'get'}, :remote => true do |f|%>
-
-                  <%= f.hidden_field :name, {:value => s.name} %>
-                  <%= f.hidden_field :party_profile_id, {:value => s.party_profile_id} %>
-                  <%= f.submit "Down", :class => "btn btn-danger refreshbutton" %>
-                  <% end %>
-                </span>
-                <div class = "buttons_holder">
-                  <div class = "button1">
-                    <span style = "float:right;">
-                      <%= form_for [@song], :html => {:method => 'get'}, :remote => true do |f|%>
-                      <%= f.hidden_field :name, {:value => s.name}%>
-                      <%= f.hidden_field :party_profile_id, {:value => s.party_profile_id}%>
-                      <%= f.submit "Up", :class => "btn btn-success refreshbutton" %>
-                      <% end %>   
-                    </span> 
-                  </div>
-
-                  <span style = "float:left;">
-                    <%= s.totalVotes %>
-                  </span>
-
-                </div>
-              </div>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>
@@ -106,7 +58,6 @@
           }
           }
         );
-        alert("hello")
 
     };
 
@@ -118,14 +69,33 @@ $('#songsearch').click(function(event)
     console.log(data);
     $('.song_results').html('');
     $('.song_results').append(data);
-    $(".addsong").click(refreshPlaylist);
+    $(".addsong").each(function(k, v) {
+        var oldhref = $(v).attr('href');
+
+        $(v).attr('href', "");
+
+        $(v).click(function() {
+
+            $.ajax({
+                url: oldhref,
+                success: function() {
+                    refreshPlaylist();
+                }, 
+                error: function() {
+                  refreshPlaylist();
+                }
+
+            })
+        });
+
+    });
 
 });
 return false
 });
 
 $(".refreshbutton").click(refreshPlaylist);
-
+$(refreshPlaylist);
 
 
 </script>
