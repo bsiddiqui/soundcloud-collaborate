@@ -11,7 +11,7 @@
 				</td>
 
 				<td>
-					<%= link_to(p.name, party_profile_path(p)) %>
+					<%= p.name %>
 				</td>
 
 				<td>
@@ -21,6 +21,9 @@
 
 				<td style = "width:250px; padding-left: 80px;">
 					<%= p.date %>
+				</td>
+				<td>
+					<%= link_to "Join!", "/partyprofiles?party_profile_id=#{p.id}" %>
 
 				</td>
 

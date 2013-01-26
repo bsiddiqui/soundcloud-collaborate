@@ -37,7 +37,16 @@ require 'soundcloud'
   
 end
 
+def newguest
 
+  @guest=Guest.find_all_by_user_id_and_party_profile_id(current_user.id, params[:party_profile_id])
+  if @guest.count < 1
+    @guest=Guest.new(:user_id => current_user.id,
+      :party_profile_id => params[:party_profile_id])
+    @guest.save
+  end
+  redirect_to party_profile_path(params[:party_profile_id])
+end
 
 #    unless @playlist.empty?
  #     respond_to do |format|
