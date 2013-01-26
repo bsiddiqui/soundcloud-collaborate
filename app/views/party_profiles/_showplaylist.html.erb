@@ -1,40 +1,38 @@
 <table class='table table-striped'>
-    <tbody class ="playlist-refresh">
-      <% @playlist.each_with_index do |s,i| %>
-      <tr>
-        <td class = "td">
-          <div class = "delete">
-             <%= link_to "X" , "/songs?name=#{s.name}&party_profile_id=#{s.party_profile_id}&commit=X", :remote => true, :class => "btn btn-inverse refreshbutton" %>
+  <tbody class ="playlist-refresh">
+    <% @playlist.each_with_index do |s,i| %>
+    <tr>
+      <td class = "td">
+        <div class = "delete">
+         <%= link_to "X" , "/songs?name=#{s.name}&party_profile_id=#{s.party_profile_id}&commit=X", :remote => true, :class => "btn btn-inverse btn-small refreshbutton" %>
 
-          </div> 
-        </td>
-        <td>
-          <%= "#{i+1}" %>.
+       </div> 
+     </td>
+     <td>
+      <%= "#{i+1}" %>.
 
-          <%= s.name %>   
-        </td>
-        <td class="soundcloudid" style="display:none;"><%= s.soundcloud_id %></td>
+      <%= s.name %>   
+    </td>
+    <td class="soundcloudid" style="display:none;"><%= s.soundcloud_id %></td>
 
-        <td>
-          <div class = "button2"> 
-            <span style = "float:right;"> 
-            <%= link_to "Down" , "/songs?name=#{s.name}&party_profile_id=#{s.party_profile_id}&commit=Down", :remote => true, :class => "btn btn-danger refreshbutton" %>
-            </span>
-            <div class = "buttons_holder">
-              <div class = "button1">
-                <span style = "float:right;">
-                <%= link_to "Up" , "/songs?name=#{s.name}&party_profile_id=#{s.party_profile_id}&commit=Up", :remote => true, :class => "btn btn-success refreshbutton" %> 
-                </span> 
-              </div>
+    <td>
+      <div class="votebutton" > 
+        <span style = "float:right;">
+          <%= link_to "Up" , "/songs?name=#{s.name}&party_profile_id=#{s.party_profile_id}&commit=Up", :remote => true, :class => "btn btn-success btn-small refreshbutton" %> 
+        </span> 
+        <span style = "float:right;"> 
+          <%= link_to "Down" , "/songs?name=#{s.name}&party_profile_id=#{s.party_profile_id}&commit=Down", :remote => true, :class => "btn btn-danger btn-small refreshbutton" %>
+        </span>
+      </div>
 
-              <span style = "float:left;">
-                <%= s.totalVotes %>
-              </span>
+      <span style = "float:left;">
+        <%= s.totalVotes %>
+      </span>
 
-            </div>
-          </div>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+    </div>
+  </div>
+</td>
+</tr>
+<% end %>
+</tbody>
+</table>

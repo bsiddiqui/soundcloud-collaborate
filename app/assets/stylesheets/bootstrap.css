@@ -31,12 +31,12 @@ a:hover{color:#157ab5;text-decoration:underline;}
 .row{margin-left:-20px;*zoom:1;}.row:before,.row:after{display:table;content:"";line-height:0;}
 .row:after{clear:both;}
 [class*="span"]{float:left;min-height:1px;margin-left:14px;}
-.container,.navbar-static-top .container,.navbar-fixed-top .container,.navbar-fixed-bottom .container{width:940px;}
-.span12{width:940px;}
+.container,.navbar-static-top .container,.navbar-fixed-top .container,.navbar-fixed-bottom .container{width:90%;}
+.span12{width:90%;}
 .span11{width:860px;}
 .span10{width:780px;}
 .span9{width:700px;}
-.span8{width:620px;}
+.span8{width:45%;}
 .span7{width:540px;}
 .span6{width:460px;}
 .span5{width:380px;}

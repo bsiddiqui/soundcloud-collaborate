@@ -1,3 +1,39 @@
 // Place all the styles related to the party_profiles controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.btn-danger, .btn-danger:hover, .btn-danger:visited, .btn-danger:active
+{
+	text-decoration:none;
+	color:white;
+	background-color:#3DAAE9;
+	background-image:none;
+} 
+
+.btn-success, .btn-success:hover, .btn-success:visited, .btn-success:active
+{
+	text-decoration:none;
+	color:white;
+	background-color:#3DAAE9;
+	background-image:none;
+} 
+
+.btn-inverse, .btn-inverse:hover, .btn-inverse:visited, .btn-inverse:active
+{
+	text-decoration:none;
+	color:white;
+	background-color:black;
+	background-image:none;
+} 
+
+.btn-primary, .btn-primary:hover, .btn-primary:visited, .btn-primary:active
+{
+	text-decoration:none;
+	color:white;
+	background-color:#3DAAE9;
+	background-image:none;
+} 
+
+body {
+background-color: #DAE9EC;
+}
