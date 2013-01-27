@@ -2,8 +2,8 @@
 	<figure>
 		<img src ="<%= @user.image %>">
 		<figcaption>
-			<p><%= @user.name %></p>
-			<i>Partying since <%= @user.created_at %></i>
+			<b><%= @user.name %></b><br>
+			<i>Partying since <%= @user.created_at.strftime("%m/%d/%Y") %></i>
 		</figcaption>
 	</figure>
 	<br>

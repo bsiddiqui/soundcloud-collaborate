@@ -40,12 +40,12 @@
           </ul>
 
           <ul class="nav pull-right">
-               <div class="fb-like" data-href="http://www.playedby.me" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial" padding-top: 10px></div>
             <% if current_user %>
             <li><%= link_to "Logout", user_path(current_user), :method => :delete  %></li>
             <% else %>
-            <li><%= link_to "Login", login_path  %></li>
+            <li><%= link_to "Login", "/auth/facebook"  %></li>
             <% end %>
+            <div class="fb-like" data-href="http://beta.playedby.me" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="arial" padding-top: 10px></div>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
