@@ -4,12 +4,12 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Hi <%= @user.name %></h1>
+    <h1>Hi <%= @user.name %>!</h1>
     <p>
-      You have successfully created a party!
+      You have successfully created a party!<br/>
 
       Your party name is: <b><%= @party_profile.name %></b>.<br/>
-		Your party will be held on <b><%= @party_profile.date %></b> at <b><%= @party_profile.location %></b>. <br/>
+		Your party will be held on <b><%= @party_profile.date %></b>(mm/dd/yyyy), at <b><%= @party_profile.location %></b>. <br/>
 
 		Your party password is: <b><%= @party_profile.password %></b>.<br/>
     </p>

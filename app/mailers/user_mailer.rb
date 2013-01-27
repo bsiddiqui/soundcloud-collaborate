@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "shrlyai.sa@gmail.com"
+  default from: "info@playedby.me"
 
   def party_email(party_profile)
   	#if @user.email = false

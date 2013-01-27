@@ -7,42 +7,46 @@
 		</figcaption>
 	</figure>
 	<br>
+	<div class="well">
 	<h2 style="text-align:center;"> Parties You Hosted </h2>
 	<div>
 		<table class = 'table table-hover' >
 			<tbody>
 				<tr id="tableheader" style = "font-weight: 900">
-					<td id="parties" style = "padding-left: 80px;"> Party Name </td>
-					<td id="parties" style = "text-align:center;"> Date </td>
-					<td id="parties" style = "padding-right: 8px;"> Location </td>	
+					<td id="parties">Party Name </td>
+					<td id="parties">Date </td>
+					<td id="parties">Location </td>	
 				</tr>
 			</tbody>
 		</table>
-	</div>	
+	
+</div>
+<div style="padding-left: 70px; padding-right: 70px;">
+
 
 	<table class='table table-hover'>
-		<tbody class ="list" style ="font-weight:bold;">
+
+		<tbody class ="list tablebody" style ="font-weight:bold;">
 
 
 			<% @parties_hosted.each_with_index do |party, index| %>
-			<tr>
+			<tr id="tablebody">
 
-				<td style = "padding-left: 90px; text-align: left;">
-					 <%= link_to(party.name, party_profile_path(party)) %>
-				</td>
+				<td id="parties"><%= link_to(party.name, party_profile_path(party)) %></td>
 
-				<td style = "text-align:center;">
-					<%= party.date %>
-				</td>
+				<td id="parties"><%= party.date %></td>
 
-				<td style = "padding-right: 20px;">
-					<%= party.location %>
-				</td>
+				<td id="parties"><%= party.location %></td>
 
 			</tr>
-			<% end %> 
+			<% end %>
+
+
 		</tbody>
+
 	</table>
+
+</div>
 </div>
 
 <div class="well">
@@ -50,37 +54,39 @@
 	<div>
 		<table class = 'table table-hover' >
 			<tbody>
-				<tr id='tableheader' style = "font-weight: 900">
-					<td id="parties" style = "padding-left: 80px;"> Party Name </td>
-					<td id="parties" style = "padding-right: 82px;"> Date </td>
-					<td id="parties" style = "padding-right: 8px;"> Location </td>
+				<tr id="tableheader" style = "font-weight: 900">
+					<td id="parties">Party Name </td>
+					<td id="parties">Date </td>
+					<td id="parties">Location </td>	
 				</tr>
 			</tbody>
 		</table>
 	</div>	
+<div style="padding-left: 70px; padding-right: 70px;">
+
 
 	<table class='table table-hover'>
-		<tbody class ="list" style ="font-weight:bold;">
+
+		<tbody class ="list tablebody" style ="font-weight:bold;">
 
 
-			<% @parties_guest.each_with_index do |party, index| %>
-			<tr>
+			<% @parties_hosted.each_with_index do |party, index| %>
+			<tr id="tablebody">
 
-				<td style = "padding-left: 90px; text-align: left;">
-					 <%= party.name %>
-				</td>
+				<td id="parties"><%= link_to(party.name, party_profile_path(party)) %></td>
 
-				<td style = "width:90px; padding-right: 250px; text-align: left;">
-					<%= party.date %>
-				</td>
+				<td id="parties"><%= party.date %></td>
 
-				<td style = "width:150px; padding-right: 20px;">
-					<%= party.location %>
-				</td>
+				<td id="parties"><%= party.location %></td>
 
 			</tr>
-			<% end %> 
+			<% end %>
+
+
 		</tbody>
+
 	</table>
+
+</div>
 </div>
 
