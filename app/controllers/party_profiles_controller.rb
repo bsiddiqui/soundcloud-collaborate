@@ -88,7 +88,7 @@ end
   def create
     @party_profile = PartyProfile.new(params[:party_profile]) 
     @party_profile.host = current_user
-    if @party_profile.save!
+    if @party_profile.save
       UserMailer.party_email(@party_profile).deliver
       redirect_to party_profile_path(@party_profile)
         
