@@ -13,5 +13,9 @@
  */
 
 body {
-background-color: #DAE9EC;
+	background-color: #DAE9EC;
+}
+
+.navbar{
+	border-top: 10px solid #DAE9EC;
 }
