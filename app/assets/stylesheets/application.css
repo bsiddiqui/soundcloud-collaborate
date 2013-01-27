@@ -18,4 +18,13 @@ body {
 
 .navbar{
 	border-top: 10px solid #DAE9EC;
+	font-weight: bold;
+}
+
+.navbar li {
+	font-size: 125%;
+}
+
+.brand:hover {
+	text-decoration: none;
 }

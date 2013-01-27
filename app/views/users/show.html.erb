@@ -1,4 +1,3 @@
-<div class="well">
 	<figure>
 		<img src ="<%= @user.image %>">
 		<figcaption>
@@ -7,6 +6,7 @@
 		</figcaption>
 	</figure>
 	<br>
+<div class="well">
 	<div class="well">
 	<h2 style="text-align:center;"> Parties You Hosted </h2>
 	<div>
@@ -21,7 +21,7 @@
 		</table>
 	
 </div>
-<div style="padding-left: 70px; padding-right: 70px;">
+<div style="padding-left: 250px; padding-right: 200px;">
 
 
 	<table class='table table-hover'>
@@ -32,11 +32,11 @@
 			<% @parties_hosted.each_with_index do |party, index| %>
 			<tr id="tablebody">
 
-				<td id="parties"><%= link_to(party.name, party_profile_path(party)) %></td>
+				<td id="parties1"><%= link_to(party.name, party_profile_path(party)) %></td>
 
 				<td id="parties"><%= party.date %></td>
 
-				<td id="parties"><%= party.location %></td>
+				<td id="parties2"><%= party.location %></td>
 
 			</tr>
 			<% end %>
@@ -62,7 +62,7 @@
 			</tbody>
 		</table>
 	</div>	
-<div style="padding-left: 70px; padding-right: 70px;">
+<div style="padding-left: 250px; padding-right: 200px;">
 
 
 	<table class='table table-hover'>
@@ -73,11 +73,11 @@
 			<% @parties_hosted.each_with_index do |party, index| %>
 			<tr id="tablebody">
 
-				<td id="parties"><%= link_to(party.name, party_profile_path(party)) %></td>
+				<td id="parties1"><%= link_to(party.name, party_profile_path(party)) %></td>
 
 				<td id="parties"><%= party.date %></td>
 
-				<td id="parties"><%= party.location %></td>
+				<td id="parties2"><%= party.location %></td>
 
 			</tr>
 			<% end %>
