@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 
     # find all the parties attended
     @parties_guest  = current_user.party_profiles
+    @user = current_user
   end
 
   def index

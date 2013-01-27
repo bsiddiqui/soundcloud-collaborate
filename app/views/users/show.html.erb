@@ -1,4 +1,13 @@
 <div class="well">
+	<figure>
+		<img src ="<%= @user.image %>">
+		<figcaption>
+			<p><%= @user.name %></p>
+			<i>Partying since <%= @user.created_at %></i>
+		</figcaption>
+	</figure>
+	<br>
+	<br>
 	<h2 style="text-align:center;"> Parties You Hosted </h2>
 	<div>
 		<table class = 'table table-hover' >
@@ -20,7 +29,7 @@
 			<tr>
 
 				<td style = "padding-left: 90px; text-align: left;">
-					 <%= party.name %>
+					 <%= link_to(party.name, party_profile_path(party)) %>
 				</td>
 
 				<td style = "width:90px; padding-right: 250px; text-align: left;">

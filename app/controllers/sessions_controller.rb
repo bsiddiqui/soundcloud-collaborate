@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
     first_name = $auth_hash["info"]["first_name"]
     last_name = $auth_hash["info"]["last_name"]
     email = $auth_hash["info"]["email"]
-    image = $auth_hash["info"]["image"]
+    image = $auth_hash["info"]["image"].gsub("=square","=large")
     uid = $auth_hash["uid"] 
     user = User.new(:name => name, :first_name => first_name, :last_name => last_name, :email => email, :image => image, :uid => uid)
     if user.save
