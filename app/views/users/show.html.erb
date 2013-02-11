@@ -70,7 +70,7 @@
 		<tbody class ="list tablebody" style ="font-weight:bold;">
 
 
-			<% @parties_hosted.each_with_index do |party, index| %>
+			<% @parties_guest.each_with_index do |party, index| %>
 			<tr id="tablebody">
 
 				<td id="parties1"><%= link_to(party.name, party_profile_path(party)) %></td>
