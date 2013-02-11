@@ -564,8 +564,8 @@ button.btn.btn-mini,input[type="submit"].btn.btn-mini{*padding-top:1px;*padding-
 .btn-group-vertical>.btn:last-child{-webkit-border-radius:0 0 4px 4px;-moz-border-radius:0 0 4px 4px;border-radius:0 0 4px 4px;}
 .btn-group-vertical>.btn-large:first-child{-webkit-border-radius:6px 6px 0 0;-moz-border-radius:6px 6px 0 0;border-radius:6px 6px 0 0;}
 .btn-group-vertical>.btn-large:last-child{-webkit-border-radius:0 0 6px 6px;-moz-border-radius:0 0 6px 6px;border-radius:0 0 6px 6px;}
-.alert{padding:8px 35px 8px 14px;margin-bottom:20px;text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);background-color:#f1ceab;border:1px solid #efb99e;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
-.alert,.alert h4{color:#dd5600;}
+.alert{padding:8px 35px 8px 14px;margin-bottom:20px;text-shadow:0 1px 0 rgba(255, 255, 255, 0.5);background-color:#FCF8E3;border:1px solid #FBEED5;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
+.alert,.alert h4{color:#C09853;}
 .alert h4{margin:0;}
 .alert .close{position:relative;top:-2px;right:-21px;line-height:20px;}
 .alert-success{background-color:#d5ecbf;border-color:#d2e6ab;color:#669533;}
