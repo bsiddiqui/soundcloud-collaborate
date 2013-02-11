@@ -16,8 +16,6 @@ td#parties1 {
 
 td#parties2 {
 	text-align: right;
-
-
 }
 
 #tableheader 
@@ -33,5 +31,11 @@ tr#tablebody
 
 }
 
-
-
+.alert a, .alert a:hover, .alert a:visited, .alert a:active
+{
+	text-decoration:none;
+	color:#C09853;
+	font-weight:bold;
+	background-color:#FCF8E3;
+	background-image:none;
+} 
