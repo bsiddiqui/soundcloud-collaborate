@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130211052622) do
+ActiveRecord::Schema.define(:version => 20130211065757) do
 
   create_table "beta", :force => true do |t|
     t.string   "email"
@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(:version => 20130211052622) do
     t.string   "name"
     t.string   "password"
     t.string   "location"
-    t.date     "date"
+    t.string   "date"
     t.string   "host"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

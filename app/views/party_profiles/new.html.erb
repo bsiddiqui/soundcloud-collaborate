@@ -12,13 +12,16 @@
 		</p>
 
 		<p>
-			 <%= u.text_field :date, :placeholder => 'dd/mm/yyyy' %>
+			<%= u.label :date %> <%= u.text_field :date, :placeholder => 'mm/dd/yyyy' %>
 
 		</p>
 
+		<!--
 		<p>
 			<%= u.label :password %> <%= u.text_field :password %>
 		</p>
+		-->
+		
 
 		<%= u.submit "Let's Party!", :class => "btn btn-primary" %>
 		<% end %>
