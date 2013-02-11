@@ -1,5 +1,5 @@
 class PartyProfilesController < ApplicationController
-require 'soundcloud'
+  require 'soundcloud'
   before_filter :authenticate_user!, :except => :index
   # GET /party_profiles
   # GET /party_profiles.json
@@ -25,36 +25,24 @@ require 'soundcloud'
     else
       @firstsong=@playlist.first.soundcloud_id
     end
+
     if @playlist.count < 2
       @nextsong="undefined"
     else
       @nextsong=@playlist.second.soundcloud_id
     end
-    
-      #@playlist.first.update_attributes(:played => true)
-    #puts @playlist.first
-    #puts "FIND ME"
-  
-end
-
-def newguest
-
-  @guest=Guest.find_all_by_user_id_and_party_profile_id(current_user.id, params[:party_profile_id])
-  if @guest.count < 1
-    @guest=Guest.new(:user_id => current_user.id,
-      :party_profile_id => params[:party_profile_id])
-    @guest.save
   end
-  redirect_to party_profile_path(params[:party_profile_id])
-end
 
-#    unless @playlist.empty?
- #     respond_to do |format|
-  #      format.html 
-#      format.json { render json: @party_profile }
- #   end
-  #end
-  #end
+  def newguest
+    @guest=Guest.find_all_by_user_id_and_party_profile_id(current_user.id, params[:party_profile_id])
+    if @guest.count < 1
+      @guest=Guest.new(:user_id => current_user.id,
+        :party_profile_id => params[:party_profile_id])
+      @guest.save
+    end
+    redirect_to party_profile_path(params[:party_profile_id])
+  end
+
 
   # GET /party_profiles/new
   # GET /party_profiles/new.json
@@ -87,27 +75,32 @@ end
   # POST /party_profiles.json
   def create
     @party_profile = PartyProfile.new(params[:party_profile]) 
-    @party_profile.host = current_user
-    if @party_profile.save
-      UserMailer.party_email(@party_profile).deliver
-      redirect_to party_profile_path(@party_profile)
-        
-      flash[:alert] = "Your party details have been emailed to you."
+    puts PartyProfile.where("name = ? AND date = ?", @party_profile.name, @party_profile.date)
+    if PartyProfile.where("name = ? AND date = ?", @party_profile.name, @party_profile.date).empty?
+      @party_profile.host = current_user
+      if @party_profile.save
+        UserMailer.party_email(@party_profile).deliver
+        redirect_to party_profile_path(@party_profile)
 
+        flash[:alert] = "Your party details have been emailed to you."
+
+      else 
+       redirect_to new_party_profile_path
+       flash[:alert] = "Please fill out all of the fields."
+      end
     else 
-     redirect_to new_party_profile_path
-     flash[:alert] = "Please fill out all of the fields."
-   end
- end
+      redirect_to :back, :alert => "A party with that name is already happening on that date. Please enter a new name."
+    end
+  end
 
-def showplaylist
-      @song = Song.new
+  def showplaylist
+    @song = Song.new
     @party_profile = PartyProfile.where("id = ?", params[:id]).first
     @songs = Song.where("played = ? AND party_profile_id = ?", false, @party_profile.id).all
     @playlist = @songs.sort! { |a,b| b[:totalVotes] <=> a[:totalVotes]}
     render :partial => 'showplaylist'
 
-     if @playlist.empty?
+    if @playlist.empty?
       @firstsong="undefined"
     else
       @firstsong=@playlist.first.soundcloud_id
@@ -116,9 +109,8 @@ def showplaylist
       @nextsong="undefined"
     else
       @nextsong=@playlist.second.soundcloud_id
-    end
-    
-end
+    end 
+  end
 
 
   # PUT /party_profiles/1
