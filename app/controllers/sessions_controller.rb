@@ -14,13 +14,17 @@ class SessionsController < ApplicationController
     email = $auth_hash["info"]["email"]
     image = $auth_hash["info"]["image"].gsub("=square","=large")
     uid = $auth_hash["uid"] 
-    user = User.new(:name => name, :first_name => first_name, :last_name => last_name, :email => email, :image => image, :uid => uid)
-    if user.save
-      session[:user_id] = user.id
-      redirect_to user_path(current_user), :alert => "Thanks for signing up!"
+    if Beta.where("email = ?", email).empty?
+      redirect_to "/login", :alert => "Sorry, we don't seem to have you on our Beta List. If you believe you're receiving this message in error, please email team@playedby.me"
     else
-      session[:user_id] = User.find_by_uid(uid).id
-      redirect_to user_path(current_user), :alert => "Welcome Back"
+      user = User.new(:name => name, :first_name => first_name, :last_name => last_name, :email => email, :image => image, :uid => uid)
+      if user.save
+        session[:user_id] = user.id
+        redirect_to user_path(current_user), :alert => "Thanks for signing up!"
+      else
+        session[:user_id] = User.find_by_uid(uid).id
+        redirect_to user_path(current_user), :alert => "Welcome Back"
+      end
     end
   end
 
