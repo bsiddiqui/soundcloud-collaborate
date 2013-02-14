@@ -1,5 +1,5 @@
 <head>
-  <script src="http://w.soundcloud.com/player/api.js" type="text/javascript"></script>
+  <script src="https://w.soundcloud.com/player/api.js" type="text/javascript"></script>
 
 </head>
 <body>
@@ -7,73 +7,108 @@
 
 
   <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
 
 
 
-<h1>Welcome to <%= @party_profile.name%></h1><div id="pop" rel="popover" data-trigger="hover" data-placement="right" data-content="Message your friends with the url and password of your party so they can join your party!" data-title="Invite your friends" class="fb-send" data-href="www.playedby.me" data-font="arial"></div>
-<br>
-<br>
+  <h1>Welcome to <%= @party_profile.name%></h1><div id="pop" rel="popover" data-trigger="hover" data-placement="right" data-content="Message your friends with the url and password of your party so they can join your party!" data-title="Invite your friends" class="fb-send" data-href="www.playedby.me" data-font="arial"></div>
+  <br>
+  <br>
 
-<div <% if @firstsong == "undefined" %> style="display:none;" <% end %>>
-  <object height="81" width="80%" id="myPlayer" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
-    <iframe id="sc-widget" width="95%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/<%= @firstsong %>&show_artwork=true&liking=ture&sharing=true&frameborder="no"&scrolling="no"&enable_api=true&object_id=myPlayer"></iframe>
-  </object>
-</div>
+  <div <% if @firstsong == "undefined" %> style="display:none;" <% end %>>
+    <object height="81" width="80%" id="myPlayer" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+      <iframe id="sc-widget" width="95%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/<%= @firstsong %>&show_artwork=true&liking=ture&sharing=true&frameborder="no"&scrolling="no"&enable_api=true&object_id=myPlayer"></iframe>
+    </object>
+  </div>
 
-<br>
-<br>
-<div class="span8">
-  <div class="well">
-    <h3> Add Songs</h3>
+  <br>
+  <br>
+  <div class="span8">
+    <div class="well">
+      <h3> Add Songs</h3>
 
-    <form action='/searchsongs'>
-      <input id="songname" name="name" type="text" placeholder="Enter Song Name"/>
-      <br>
-      <input id="partyprofileid" name="party_profile_id" type="hidden" value= "<%= @party_profile.id%>"/>
-      <input id="songsearch" type='submit' value='Search' class="btn btn-primary"/>
-    </form>   
-    <div class="song_results">
+      <form action='/searchsongs'>
+        <input id="songname" name="name" type="text" placeholder="Enter Song Name"/>
+        <br>
+        <input id="partyprofileid" name="party_profile_id" type="hidden" value= "<%= @party_profile.id%>"/>
+        <input id="songsearch" type='submit' value='Search' class="btn btn-primary"/>
+      </form>   
+      <div class="song_results">
+      </div>
     </div>
   </div>
-</div>
 
 
-<div class="span8">
-  <div class="well">
+  <div class="span8">
+    <div class="well">
 
-    <h3> Playlist </h3>
+      <h3> Playlist </h3>
 
-    <div class="playlist">
+      <div class="playlist">
+      </div>
     </div>
   </div>
-</div>
 
 
-<script>
+  <script>
 
 
 
-function refreshPlaylist()
-{
+  function refreshPlaylist()
+  {
 
-  var partyid = <%= @party_profile.id %>;
-  var url = "/party_profiles/" + partyid + "/_showplaylist";
+    var partyid = <%= @party_profile.id %>;
+    var url = "/party_profiles/" + partyid + "/_showplaylist";
 
-  $.ajax({
-    url: url, 
-    success: function(data) {
-      $(".playlist").html(data);
-      var widget = SC.Widget("sc-widget");
+    $.ajax({
+      url: url, 
+      success: function(data) {
+        $(".playlist").html(data);
+        var widget = SC.Widget("sc-widget");
 
 
-      $(".refreshbutton").each(function(k, v) {
+        $(".refreshbutton").each(function(k, v) {
+          var oldhref = $(v).attr('href');
+
+          $(v).attr('href', "");
+
+          $(v).click(function() {
+
+            $.ajax({
+              url: oldhref,
+              success: function() {
+                refreshPlaylist();
+              }, 
+              error: function() {
+                refreshPlaylist();
+              }
+
+            })
+          });
+
+        });
+
+
+      }
+    });
+
+  };
+
+  $('#songsearch').click(function(event) 
+  {
+    var name = $('#songname').val()
+    $.get('/searchsongs?name='+name+('&party_profile_id=')+$('#partyprofileid').val(), function(data) 
+    {
+      console.log(data);
+      $('.song_results').html('');
+      $('.song_results').append(data);
+      $(".addsong").each(function(k, v) {
         var oldhref = $(v).attr('href');
 
         $(v).attr('href', "");
@@ -94,79 +129,44 @@ function refreshPlaylist()
 
       });
 
-
-    }
-  });
-
-};
-
-$('#songsearch').click(function(event) 
-{
-  var name = $('#songname').val()
-  $.get('/searchsongs?name='+name+('&party_profile_id=')+$('#partyprofileid').val(), function(data) 
-  {
-    console.log(data);
-    $('.song_results').html('');
-    $('.song_results').append(data);
-    $(".addsong").each(function(k, v) {
-      var oldhref = $(v).attr('href');
-
-      $(v).attr('href', "");
-
-      $(v).click(function() {
-
-        $.ajax({
-          url: oldhref,
-          success: function() {
-            refreshPlaylist();
-          }, 
-          error: function() {
-            refreshPlaylist();
-          }
-
-        })
-      });
-
     });
-
+    return false
   });
-  return false
-});
 
 
 
-$(refreshPlaylist);
+  $(refreshPlaylist);
 
 
-$(function(){
-  var widget = SC.Widget("sc-widget");
+  $(function(){
+    var widget = SC.Widget("sc-widget");
 
-  widget.bind('pause', function() {
+    widget.bind('pause', function() {
     // code that executes when the function pauses
   });
 
 
-  widget.bind('play', function() {
+    widget.bind('play', function() {
         // code that executes when the function plays
 
         widget.getCurrentSound(function(sound){
-        var soundcloudid = sound.id;
-        console.log(soundcloudid);
-        /*var soundcloudid = $(".soundcloudid").first().html();*/
-        var partyid = <%= @party_profile.id %>;
-        if (soundcloudid !== undefined) {
-          $.ajax({
-            url: "/songplayed?soundcloud_id=" + soundcloudid + "&party_profile_id=" + partyid , 
-            success: function() {
-              refreshPlaylist();
-            }
-          });
-        }
-      });
+          var soundcloudid = sound.id;
+          console.log(soundcloudid);
+          /*var soundcloudid = $(".soundcloudid").first().html();*/
+          var partyid = <%= @party_profile.id %>;
+          if (soundcloudid !== undefined) {
+            $.ajax({
+              url: "/songplayed?soundcloud_id=" + soundcloudid + "&party_profile_id=" + partyid , 
+              success: function() {
+                refreshPlaylist();
+              }
+            });
+          }
+        });
       });
 
 
-  widget.bind('finish', function() {
+    widget.bind('finish', function() {
         // code that executes when the function finishes
 
         var nextsong = $(".soundcloudid").first().html()
@@ -177,9 +177,9 @@ $(function(){
           url: // song 
         });*/
 
-});
+  });
 
-});
+  });
 </script>
 </body>
 
