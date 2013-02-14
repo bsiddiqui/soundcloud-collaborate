@@ -149,8 +149,10 @@ $(function(){
   widget.bind('play', function() {
         // code that executes when the function plays
 
-
-        var soundcloudid = $(".soundcloudid").first().html();
+        widget.getCurrentSound(function(sound){
+        var soundcloudid = sound.id;
+        console.log(soundcloudid);
+        /*var soundcloudid = $(".soundcloudid").first().html();*/
         var partyid = <%= @party_profile.id %>;
         if (soundcloudid !== undefined) {
           $.ajax({
@@ -160,6 +162,7 @@ $(function(){
             }
           });
         }
+      });
       });
 
 

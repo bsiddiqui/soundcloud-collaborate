@@ -91,7 +91,6 @@ end
   def songplayed
     @song = Song.where("soundcloud_id = ? AND party_profile_id = ?", params[:soundcloud_id], params[:party_profile_id]).first
     @song.update_attributes(:played => true)
-    puts "songplayed!!!!!"
   end
 
 
