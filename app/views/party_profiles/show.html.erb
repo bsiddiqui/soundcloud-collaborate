@@ -165,13 +165,25 @@
         });
       });
 
-
-    widget.bind('finish', function() {
+ widget.bind('finish', function() {
         // code that executes when the function finishes
 
-        var nextsong = $(".soundcloudid").first().html()
+        var nextsong = $(".soundcloudid").first().html();
         var soundcloudurl = "https://api.soundcloud.com/tracks/" + nextsong;
         $.when(widget.load(soundcloudurl, {auto_play: true})).then(widget.play());
+
+  
+          /*var soundcloudid = $(".soundcloudid").first().html();*/
+          var partyid = <%= @party_profile.id %>;
+          if (nextsong !== undefined) {
+            $.ajax({
+              url: "/songplayed?soundcloud_id=" + nextsong + "&party_profile_id=" + partyid , 
+              success: function() {
+                refreshPlaylist();
+              }
+            });
+          }
+
 
         /*$.ajax({
           url: // song 
