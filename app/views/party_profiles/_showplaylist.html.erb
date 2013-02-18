@@ -4,7 +4,9 @@
     <tr>
       <td class = "td">
         <div class = "delete">
-         <%= link_to "X" , "/songs?name=#{s.name}&party_profile_id=#{s.party_profile_id}&commit=X", :remote => true, :class => "btn btn-inverse btn-small refreshbutton" %>
+        <% if @current_user.id == Integer(@party_profile.host) %>
+          <%= link_to "X" , "/songs?name=#{s.name}&party_profile_id=#{s.party_profile_id}&commit=X", :remote => true, :class => "btn btn-inverse btn-small refreshbutton" %>
+        <% end %>
 
        </div> 
      </td>
