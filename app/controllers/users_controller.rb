@@ -4,7 +4,6 @@ class UsersController < ApplicationController
     authenticate_user! 
   end
 
-
   def edit
   end
 
@@ -15,8 +14,6 @@ class UsersController < ApplicationController
     if @parties_hosted.empty?
       flash.now[:alert] = "You have not thrown any parties. #{ActionController::Base.helpers.link_to "Start a party?", '/party_profiles/new'}".html_safe
     end
-
-#{ActionController::Base.helpers.link_to "Here's why.", '/more_info.html'}".html_safe
 
     # find all the parties attended
     @parties_guest  = current_user.party_profiles

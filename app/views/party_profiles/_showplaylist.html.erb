@@ -18,7 +18,7 @@
     <td class="soundcloudid" style="display:none;"><%= s.soundcloud_id %></td>
 
     <td>
-      <div class="votebutton" > 
+      <div class="votebutton"> 
         <span style = "float:right;"> 
           <%= link_to "Down" , "/songs?name=#{s.name}&party_profile_id=#{s.party_profile_id}&commit=Down", :remote => true, :class => "btn btn-danger btn-small refreshbutton" %>
         </span>
