@@ -1,15 +1,11 @@
 PlayedbyMeHh::Application.routes.draw do
 
   get "/", :to =>  "sessions#new"
-
-  get "static_pages/new"
-
+  get "static_pages/about"
+  get "static_pages/feedback"
   get "/parties/search", :to => 'party_profiles#search'
-
   get "/search", :to => 'party_profiles#display'
- 
   get "party_profiles/display", :to => 'party_profiles#display'
-
   get '/songs', :to => 'songs#show'
 
   resources :guests
