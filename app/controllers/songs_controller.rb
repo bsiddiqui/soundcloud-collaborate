@@ -12,18 +12,47 @@ class SongsController < ApplicationController
       format.json { render json: @songs }
     end
   end
+    
+
+    #@songs = Song.where("played = ? AND party_profile_id = ?", false, @party_profile.id).all
 
   # GET /songs/1
   # GET /songs/1.json
   def show
     @song = Song.find_by_name_and_party_profile_id(params[:name], params[:party_profile_id])
-    if params[:commit] == "Up"
-      @votecount = @song.totalVotes.to_i + 1
-      @song.update_attribute(:totalVotes, @votecount)
+
+    #if User hasn't voted on a song at party, add a record of them voting 
+    if UserVote.where("user_id = ? AND party_profile_id = ? AND soundcloud_id =?", current_user.id, @song.party_profile_id, @song.soundcloud_id).empty?
+      uservote = UserVote.new(:user_id => current_user.id, :party_profile_id => @song.party_profile_id, :soundcloud_id => @song.soundcloud_id)
+      uservote.save
     end
-    if params[:commit] == "Down"
-      @votecount = @song.totalVotes.to_i - 1
-      @song.update_attribute(:totalVotes, @votecount)
+
+    # create a var to access uservotes
+    uservotes = UserVote.where("user_id = ? AND party_profile_id = ? AND soundcloud_id =?", current_user.id, @song.party_profile_id, @song.soundcloud_id).first
+
+    #if user has not voted or has downvoted, allow upvote
+    if (params[:commit] == "Up")
+      if uservotes.totalVotes <= 0
+        @votecount = @song.totalVotes.to_i + 1
+        @song.update_attribute(:totalVotes, @votecount)
+        uservotes.update_attribute(:totalVotes, uservotes.totalVotes + 1)
+        puts "can upvote"
+      else
+        #insert flash error
+        puts "can't upvote"
+      end
+    end
+    
+    #if user has not voted or has upvoted, allow downvote
+    if (params[:commit] == "Down") 
+      if uservotes.totalVotes >= 0
+        @votecount = @song.totalVotes.to_i - 1
+        @song.update_attribute(:totalVotes, @votecount)
+        uservotes.update_attribute(:totalVotes, uservotes.totalVotes - 1)
+      else
+        #insert flash error
+        puts "can't downvote"
+      end
     end
 
     if params[:commit] == "X"

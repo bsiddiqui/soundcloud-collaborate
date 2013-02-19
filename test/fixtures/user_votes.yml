@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  user_id: 
+  party_profile_id: 
+  soundcloud_id: 
+  total_votes: 
+
+two:
+  user_id: 
+  party_profile_id: 
+  soundcloud_id: 
+  total_votes: 
