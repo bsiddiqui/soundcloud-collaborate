@@ -57,8 +57,6 @@
 
   <script>
 
-
-
   function refreshPlaylist()
   {
 
@@ -94,76 +92,85 @@
         });
         var $songToLoad = $('.soundcloudid:first');
         if ($songToLoad.length == 1) {
-          console.log($songToLoad.html())
           console.log('Show the widget');
+          var $songToLoadURL = "https://api.soundcloud.com/tracks/" + $songToLoad.html();
+          var nextsong = $('.soundcloudid:eq(1)');
+
+          //only load new song if widget is empty
+          // temp fix - known bug: when one song is left the SC widget refreshes
+          if (nextsong.length == 0){
+            SC.Widget("sc-widget").load($songToLoadURL, {auto_play: false});
+          }
           $("#sc-widget").show();
         }
         else {
           console.log('Hide the widget');
+          // only hide widget if widget is empty
           $("#sc-widget").hide();
         }
+
       }
     });
 
-  };
+};
 
-  $('#songsearch').click(function(event) 
+$('#songsearch').click(function(event) 
+{
+  var name = $('#songname').val()
+  $.get('/searchsongs?name='+name+('&party_profile_id=')+$('#partyprofileid').val(), function(data) 
   {
-    var name = $('#songname').val()
-    $.get('/searchsongs?name='+name+('&party_profile_id=')+$('#partyprofileid').val(), function(data) 
-    {
-      console.log(data);
-      $('.song_results').html('');
-      $('.song_results').append(data);
-      $(".addsong").each(function(k, v) {
-        var oldhref = $(v).attr('href');
+    console.log(data);
+    $('.song_results').html('');
+    $('.song_results').append(data);
+    $(".addsong").each(function(k, v) {
+      var oldhref = $(v).attr('href');
 
-        $(v).attr('href', "");
+      $(v).attr('href', "");
 
-        $(v).click(function() {
+      $(v).click(function() {
 
-          $.ajax({
-            url: oldhref,
-            success: function() {
-              refreshPlaylist();
-            }, 
-            error: function() {
-              refreshPlaylist();
-            }
+        $.ajax({
+          url: oldhref,
+          success: function() {
+            refreshPlaylist();
+          }, 
+          error: function() {
+            refreshPlaylist();
+          }
 
-          })
-        });
-
+        })
       });
 
     });
-    return false
+
   });
+  return false
+});
 
-  $(".playlist").change(function() {
-    var songtoload = $(".soundcloudid").first().html();
-    if (songtoload == undefined) {
-      $("#sc-widget").hide();
-    }
-    if (songtoload !== undefined) {
-      $("#sc-widget").show();
-      alert("undefined");
-    }
-  });
+$(".playlist").change(function() {
+  var songtoload = $(".soundcloudid").first().html();
+  if (songtoload == undefined) {
+    $("#sc-widget").hide();
+  }
+  if (songtoload !== undefined) {
+    $("#sc-widget").show();
+    alert("undefined");
+  }
+});
 
 
-  $(refreshPlaylist);
+$(refreshPlaylist);
 
 
-  $(function(){
-    var widget = SC.Widget("sc-widget");
+$(function(){
+  var widget = SC.Widget("sc-widget");
 
-    widget.bind('pause', function() {
+  widget.bind('pause', function() {
     // code that executes when the function pauses
   });
 
 
-    widget.bind('play', function() {
+  widget.bind('play', function() {
         // code that executes when the function plays
 
         widget.getCurrentSound(function(sound){
@@ -182,7 +189,7 @@
         });
       });
 
-    widget.bind('finish', function() {
+  widget.bind('finish', function() {
         // code that executes when the function finishes
 
         var nextsong = $(".soundcloudid").first().html();
@@ -206,8 +213,8 @@
           url: // song 
         });*/
 
-  });
+});
 
-  });
+});
 </script>
 </body>
