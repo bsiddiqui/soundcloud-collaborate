@@ -19,7 +19,7 @@
   <br>
 
   <% if @current_user.id == Integer(@party_profile.host) %>
-    <div <% if @firstsong == "undefined" %> style="display:none;" <% end %>>
+    <div >
       <object height="81" width="80%" id="myPlayer" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
         <iframe id="sc-widget" width="95%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/<%= @firstsong %>&show_artwork=true&liking=ture&sharing=true&frameborder="no"&scrolling="no"&enable_api=true&object_id=myPlayer"></iframe>
       </object>
@@ -131,7 +131,6 @@
     });
     return false
   });
-
 
 
   $(refreshPlaylist);

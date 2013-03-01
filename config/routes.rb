@@ -14,7 +14,7 @@ PlayedbyMeHh::Application.routes.draw do
 
   get "/party_profiles/:id/_showplaylist", :to => 'party_profiles#showplaylist'
 
- get "/partyprofiles", :to => 'party_profiles#newguest'
+  get "/partyprofiles", :to => 'party_profiles#newguest'
   resources :party_profiles do
     member do
       get :showplaylist
