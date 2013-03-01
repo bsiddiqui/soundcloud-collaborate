@@ -19,11 +19,11 @@
   <br>
 
   <% if @current_user.id == Integer(@party_profile.host) %>
-    <div >
-      <object height="81" width="80%" id="myPlayer" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
-        <iframe id="sc-widget" width="95%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/<%= @firstsong %>&show_artwork=true&liking=ture&sharing=true&frameborder="no"&scrolling="no"&enable_api=true&object_id=myPlayer"></iframe>
-      </object>
-    </div>
+  <div >
+    <object height="81" width="80%" id="myPlayer" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+      <iframe id="sc-widget" width="95%" height="166" scrolling="no" frameborder="no" src="https://w.soundcloud.com/player/?url=https://api.soundcloud.com/tracks/<%= @firstsong %>&show_artwork=true&liking=ture&sharing=true&frameborder="no"&scrolling="no"&enable_api=true&object_id=myPlayer"></iframe>
+    </object>
+  </div>
   <% end %>
 
   <br>
@@ -92,8 +92,16 @@
           });
 
         });
-
-
+        var $songToLoad = $('.soundcloudid:first');
+        if ($songToLoad.length == 1) {
+          console.log($songToLoad.html())
+          console.log('Show the widget');
+          $("#sc-widget").show();
+        }
+        else {
+          console.log('Hide the widget');
+          $("#sc-widget").hide();
+        }
       }
     });
 
@@ -132,6 +140,17 @@
     return false
   });
 
+  $(".playlist").change(function() {
+    var songtoload = $(".soundcloudid").first().html();
+    if (songtoload == undefined) {
+      $("#sc-widget").hide();
+    }
+    if (songtoload !== undefined) {
+      $("#sc-widget").show();
+      alert("undefined");
+    }
+  });
+
 
   $(refreshPlaylist);
 
@@ -163,24 +182,24 @@
         });
       });
 
- widget.bind('finish', function() {
+    widget.bind('finish', function() {
         // code that executes when the function finishes
 
         var nextsong = $(".soundcloudid").first().html();
         var soundcloudurl = "https://api.soundcloud.com/tracks/" + nextsong;
         $.when(widget.load(soundcloudurl, {auto_play: true})).then(widget.play());
 
-  
-          /*var soundcloudid = $(".soundcloudid").first().html();*/
-          var partyid = <%= @party_profile.id %>;
-          if (nextsong !== undefined) {
-            $.ajax({
-              url: "/songplayed?soundcloud_id=" + nextsong + "&party_profile_id=" + partyid , 
-              success: function() {
-                refreshPlaylist();
-              }
-            });
-          }
+
+        /*var soundcloudid = $(".soundcloudid").first().html();*/
+        var partyid = <%= @party_profile.id %>;
+        if (nextsong !== undefined) {
+          $.ajax({
+            url: "/songplayed?soundcloud_id=" + nextsong + "&party_profile_id=" + partyid , 
+            success: function() {
+              refreshPlaylist();
+            }
+          });
+        }
 
 
         /*$.ajax({
